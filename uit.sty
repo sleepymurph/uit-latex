@@ -3,7 +3,16 @@
 
 % Author: Mike Murphy <michael.j.murphy@uit.no>
 
-% This is for the grafisprofil introduced in 2019 (see [Hva og hvorfor?]).
+% Colors are specified in both coated (bestrøket) and uncoated (ubestrøket)
+% versions. My understanding is that this is for glossy vs matte paper.
+% Coated (bestøket) is the default since it is listed first on the color card.
+% To use the uncoated (ubestrøket) version of the color, use the option uncoated.
+\newif\if@uit@coated\@uit@coatedtrue
+\DeclareOption{uncoated}{\@uit@coatedfalse}
+
+\ProcessOptions\relax
+
+% This is for the grafiskprofil introduced in 2019 (see [Hva og hvorfor?]).
 %
 % [Hva og hvorfor?]: https://uit.no/ansatte/grafiskprofil#innhold_617372
 
@@ -15,11 +24,46 @@
 
 \RequirePackage{xcolor}
 
-\selectcolormodel{cmyk}%
-\definecolor{uitblue}{HTML/RGB/cmyk}{003349 / 0,51,73 / 1.0, 0.17, 0, 0.73}
+% Parameters: name, bestrøket, ubestrøket, RGB, HTML (order on the UiT web page)
+\newcommand{\uit@definecolor}[5]{%
+    % Explicitly set the lowercase 'rgb' definition from the 'RGB' definition.
+    % Otherwise, xcolor will calculate it from the 'cmyk' definition
+    % (because 'cmyk' is listed first) and come up with a different color.
+    \convertcolorspec{RGB}{#4}{rgb}{\rgb}
+    \definecolor{#1}{cmyk/RGB/HTML/rgb}{\if@uit@coated #2 \else #3 \fi / #4 / #5 / \rgb}
+}
+
+\uit@definecolor{UitDarkBlue}
+    {0.94, 0.24, 0.00, 0.85}
+    {1.00, 0.17, 0.00, 0.73}
+    {0, 51, 73} {003349}
+
+\uit@definecolor{UitRed}
+    {0.02, 0.97, 0.85, 0.07}
+    {0.01, 0.87, 0.89, 0.04}
+    {203, 51, 59} {CB333B}
+
+\uit@definecolor{UitMedBlue}
+    {0.98, 0.06, 0.10, 0.29}
+    {0.99, 0.03, 0.16, 0.19}
+    {0, 115, 150} {007396}
+
+\uit@definecolor{UitLightBlue}
+    {0.60, 0.00, 0.25, 0.00}
+    {0.60, 0.00, 0.20, 0.00}
+    {89, 190, 201} {59BEC9}
+
+\uit@definecolor{UitYellow}
+    {0.00, 0.32, 1.00, 0.00}
+    {0.00, 0.31, 0.90, 0.00}
+    {242, 169, 0} {F2A900}
 
 \newcommand{\uitcolortest}{%
     \begin{testcolors}[cmyk,RGB,HTML]
-        \testcolor{uitblue}
+        \testcolor{UitDarkBlue}
+        \testcolor{UitRed}
+        \testcolor{UitMedBlue}
+        \testcolor{UitLightBlue}
+        \testcolor{UitYellow}
     \end{testcolors}
 }
