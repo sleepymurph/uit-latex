@@ -1,0 +1,10 @@
+# Output files
+*.pdf
+
+# LaTeX temporary files
+*.aux
+*.log
+*.nav
+*.out
+*.snm
+*.toc

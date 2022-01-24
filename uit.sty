@@ -1,0 +1,25 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{uit}[2022/01/24 Styles for UiT The Arctic University of Norway]
+
+% Author: Mike Murphy <michael.j.murphy@uit.no>
+
+% This is for the grafisprofil introduced in 2019 (see [Hva og hvorfor?]).
+%
+% [Hva og hvorfor?]: https://uit.no/ansatte/grafiskprofil#innhold_617372
+
+% Colors
+% ------------------------------------------------------------
+%
+% [UiTs fargepalett]: https://uit.no/ansatte/grafiskprofil#innhold_617372
+% [Fargekombinasjoner]: https://uit.no/ansatte/grafiskprofil#innhold_631461
+
+\RequirePackage{xcolor}
+
+\selectcolormodel{cmyk}%
+\definecolor{uitblue}{HTML/RGB/cmyk}{003349 / 0,51,73 / 1.0, 0.17, 0, 0.73}
+
+\newcommand{\uitcolortest}{%
+    \begin{testcolors}[cmyk,RGB,HTML]
+        \testcolor{uitblue}
+    \end{testcolors}
+}
