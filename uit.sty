@@ -10,8 +10,13 @@
 \newif\if@uit@coated\@uit@coatedtrue
 \DeclareOption{uncoated}{\@uit@coatedfalse}
 
+% Install beamer color palette
 \newif\if@uit@usecolortheme\@uit@usecolorthemefalse
 \DeclareOption{usecolortheme}{\@uit@usecolorthemetrue}
+
+% Use dark versions of the beam palette colors
+\newif\if@uit@darkouter\@uit@darkouterfalse
+\DeclareOption{darkouter}{\@uit@usecolorthemetrue\@uit@darkoutertrue}
 
 \ProcessOptions\relax
 
@@ -97,29 +102,28 @@
 \mode<presentation>
     \setbeamercolor*{alerted text}      {fg=UitRed}
     \setbeamercolor*{structure}         {fg=UitMedBlue!50!UitPptBgLeft}
-    \setbeamercolor*{palette primary}   {fg=UitMedBlue}
-    \setbeamercolor*{palette secondary} {fg=UitMedBlue!50!UitPptBgLeft}
-    \setbeamercolor*{palette tertiary}  {fg=UitPptBgLeft}
-    \setbeamercolor*{palette quaternary}{fg=UitDarkBlue}
+    \if@uit@darkouter
+        \setbeamercolor*{palette primary}   {fg=white, bg=UitMedBlue}
+        \setbeamercolor*{palette secondary} {fg=white, bg=UitMedBlue!50!UitPptBgLeft}
+        \setbeamercolor*{palette tertiary}  {fg=white, bg=UitPptBgLeft}
+        \setbeamercolor*{palette quaternary}{fg=white, bg=UitDarkBlue}
+    \else
+        \setbeamercolor*{palette primary}   {bg=white, fg=UitMedBlue}
+        \setbeamercolor*{palette secondary} {bg=white, fg=UitMedBlue!50!UitPptBgLeft}
+        \setbeamercolor*{palette tertiary}  {bg=white, fg=UitPptBgLeft}
+        \setbeamercolor*{palette quaternary}{bg=white, fg=UitDarkBlue}
+    \fi
     \setbeamercolor*{titlelike}         {parent=palette primary}
 \mode<all>
 \fi
 
-\newcommand{\testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
-\newcommand{\showclr}[2]{%
-    \convertcolorspec{named}{#1}{#2}{\rgb}
-}
+\newcommand{\uit@testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
 
 \newcommand{\uitcolortestbeamerpalette}{%
-    \newcommand{\beamertestcolor}[1]{%
-        \usebeamercolor{##1}%
-        {\fboxsep\z@\fcolorbox{black}{fg}{\phantom{XX}}}
-        ##1 \testcolor{fg}%
-    }%
     \newcommand{\testbeamercolor}[1]{%
         ##1 &
-        \usebeamercolor{##1}\testclr{fg} \convertcolorspec{named}{fg}{HTML}\html \html &
-        \usebeamercolor{##1}\testclr{bg} \convertcolorspec{named}{bg}{HTML}\html \html \\
+        \usebeamercolor{##1}\uit@testclr{fg} \convertcolorspec{named}{fg}{HTML}\html \html &
+        \usebeamercolor{##1}\uit@testclr{bg} \convertcolorspec{named}{bg}{HTML}\html \html \\
     }%
     \begin{tabular}{lll}
         \bf color & \bf fg & \bf bg \\
