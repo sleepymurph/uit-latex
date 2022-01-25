@@ -2,7 +2,7 @@
 
 default: assets2019 uitbeamertest.pdf
 
-%.pdf: %.tex uit.sty
+%.pdf: %.tex $(wildcard *.sty)
 	pdflatex -halt-on-error $<
 
 

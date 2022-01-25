@@ -1,0 +1,61 @@
+\mode<presentation>
+
+\RequirePackage{uit}
+
+% Presentation colors
+% ------------------------------------------------------------
+%
+% The 2019 UiT PowerPoint template focuses entirely on the title page.
+% There isn't a master slide for normal slides.
+%
+% For the title page:
+%
+% The right half is 003349, the UitDarkBlue color.
+% The  left half is 004660, which is just a lightened version of that color.
+%
+% If we take that same step again we get 005971,
+% then 007282, which is very close to the 007396 of the UitMedBlue color.
+%
+% So these four steps are perfect for a four-color Beamer palette.
+%
+% "By default, the palette colors do not have a background and the foreground
+% ranges from structure.fg to black."
+
+\colorlet{UitPptBgRight}{UitDarkBlue}
+\definecolor{UitPptBgLeft}{HTML}{004660}
+
+\setbeamercolor*{alerted text}      {fg=UitRed}
+\setbeamercolor*{structure}         {fg=UitMedBlue}
+
+\setbeamercolor*{palette primary}   {fg=white, bg=UitMedBlue}
+\setbeamercolor*{palette secondary} {fg=white, bg=UitMedBlue!50!UitPptBgLeft}
+\setbeamercolor*{palette tertiary}  {fg=white, bg=UitPptBgLeft}
+\setbeamercolor*{palette quaternary}{fg=white, bg=UitDarkBlue}
+
+\setbeamercolor*{titlelike}         {parent=palette primary}
+
+% Adapted from the xcolor source
+\newcommand{\uit@testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
+
+\newcommand{\uitcolortestbeamerpalette}{%
+    \newcommand{\testbeamercolor}[1]{%
+        ##1 &
+        \usebeamercolor{##1}\uit@testclr{fg} \convertcolorspec{named}{fg}{HTML}\html \html &
+        \usebeamercolor{##1}\uit@testclr{bg} \convertcolorspec{named}{bg}{HTML}\html \html &
+        \usebeamercolor{##1}\fboxsep 1pt \colorbox{bg}{\textcolor{fg}{##1}} \\
+    }%
+    \begin{tabular}{llll}
+        \bf color & \bf fg & \bf bg & \bf sample \\
+        \testbeamercolor{normal text}
+        \testbeamercolor{example text}
+        \testbeamercolor{alerted text}
+        \\
+        \testbeamercolor{structure}
+        \testbeamercolor{palette primary}
+        \testbeamercolor{palette secondary}
+        \testbeamercolor{palette tertiary}
+        \testbeamercolor{palette quaternary}
+    \end{tabular}
+}
+
+\mode<all>
