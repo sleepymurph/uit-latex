@@ -28,11 +28,25 @@
 \setbeamercolor*{structure}         {fg=UitMedBlue}
 
 \setbeamercolor*{palette primary}   {fg=white, bg=UitMedBlue}
-\setbeamercolor*{palette secondary} {fg=white, bg=UitMedBlue!50!UitPptBgLeft}
-\setbeamercolor*{palette tertiary}  {fg=white, bg=UitPptBgLeft}
+\setbeamercolor*{palette secondary} {fg=white, bg=UitMedBlue!66!UitDarkBlue}
+\setbeamercolor*{palette tertiary}  {fg=white, bg=UitMedBlue!33!UitDarkBlue}
 \setbeamercolor*{palette quaternary}{fg=white, bg=UitDarkBlue}
 
 \setbeamercolor*{titlelike}         {parent=palette primary}
+
+% For reference, the 'infolines' outer theme uses
+%
+% Header: | 3: section    | 1: subsection  |
+%         +---------------+----------------+
+%         |                                |
+%         +-----------+----------+---------+
+% Footer: | 3: author | 2: title | 1: date |
+%
+% In general, primary is for the things that change the most
+
+
+% Color test helper
+% ------------------------------------------------------------
 
 % Adapted from the xcolor source
 \newcommand{\uit@testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
