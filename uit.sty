@@ -10,13 +10,9 @@
 \newif\if@uit@coated\@uit@coatedtrue
 \DeclareOption{uncoated}{\@uit@coatedfalse}
 
-% Install beamer color palette
-\newif\if@uit@usecolortheme\@uit@usecolorthemefalse
-\DeclareOption{usecolortheme}{\@uit@usecolorthemetrue}
-
 % Use dark versions of the beam palette colors
 \newif\if@uit@darkouter\@uit@darkouterfalse
-\DeclareOption{darkouter}{\@uit@usecolorthemetrue\@uit@darkoutertrue}
+\DeclareOption{darkouter}{\@uit@darkoutertrue}
 
 \ProcessOptions\relax
 
@@ -98,7 +94,7 @@
 \colorlet{UitPptBgRight}{UitDarkBlue}
 \definecolor{UitPptBgLeft}{HTML}{004660}
 
-\if@uit@usecolortheme
+\ifdefined\setbeamercolor
 \mode<presentation>
     \setbeamercolor*{alerted text}      {fg=UitRed}
     \setbeamercolor*{structure}         {fg=UitMedBlue!50!UitPptBgLeft}
@@ -132,6 +128,7 @@
         \testbeamercolor{alerted text}
         \\
         \testbeamercolor{structure}
+        \\
         \testbeamercolor{palette primary}
         \testbeamercolor{palette secondary}
         \testbeamercolor{palette tertiary}
