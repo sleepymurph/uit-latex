@@ -24,15 +24,19 @@
 \colorlet{UitPptBgRight}{UitDarkBlue}
 \definecolor{UitPptBgLeft}{HTML}{004660}
 
+% Outer colors: patterned after the 'whale' outer color theme
+% ------------------------------------------------------------
+
 \setbeamercolor*{alerted text}      {fg=UitRed}
-\setbeamercolor*{structure}         {fg=UitMedBlue}
+\setbeamercolor*{example text}      {fg=UitYellow}
 
 \setbeamercolor*{palette primary}   {fg=white, bg=UitMedBlue}
 \setbeamercolor*{palette secondary} {fg=white, bg=UitMedBlue!66!UitDarkBlue}
 \setbeamercolor*{palette tertiary}  {fg=white, bg=UitMedBlue!33!UitDarkBlue}
 \setbeamercolor*{palette quaternary}{fg=white, bg=UitDarkBlue}
 
-\setbeamercolor*{titlelike}         {parent=palette primary}
+\setbeamercolor*{structure}         {fg=UitMedBlue}
+%\setbeamercolor*{titlelike}         {parent=palette primary}
 
 % For reference, the 'infolines' outer theme uses
 %
@@ -43,6 +47,23 @@
 % Footer: | 3: author | 2: title | 1: date |
 %
 % In general, primary is for the things that change the most
+
+
+% Inner colors: patterned after the 'orchid' outer color theme
+% ------------------------------------------------------------
+
+\setbeamercolor{block title}{parent=titlelike}
+
+% From 'orchid': block bodies blend the respective title bg with the parent bg
+\setbeamercolor{block body}
+    {parent=normal text, use=block title,           bg=block title.bg!10!bg}
+\setbeamercolor{block body alerted}
+    {parent=normal text, use=block title alerted,   bg=block title alerted.bg!10!bg}
+\setbeamercolor{block body example}
+    {parent=normal text, use=block title example,   bg=block title example.bg!10!bg}
+
+% And the 'orchid' color theme shades blocks
+% by blending the 'structure' color with black
 
 
 % Color test helper
@@ -61,14 +82,21 @@
     \begin{tabular}{llll}
         \bf color & \bf fg & \bf bg & \bf sample \\
         \testbeamercolor{normal text}
-        \testbeamercolor{example text}
         \testbeamercolor{alerted text}
+        \testbeamercolor{example text}
         \\
         \testbeamercolor{structure}
         \testbeamercolor{palette primary}
         \testbeamercolor{palette secondary}
         \testbeamercolor{palette tertiary}
         \testbeamercolor{palette quaternary}
+        \\
+        \testbeamercolor{block title}
+        \testbeamercolor{block body}
+        \testbeamercolor{block title alerted}
+        \testbeamercolor{block body alerted}
+        \testbeamercolor{block title example}
+        \testbeamercolor{block body example}
     \end{tabular}
 }
 

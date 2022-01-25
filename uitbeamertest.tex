@@ -10,7 +10,6 @@
 
 \selectcolormodel{rgb}
 
-\usecolortheme{orchid}
 \useoutertheme{infolines}
 \usecolortheme{uitdark}
 
@@ -20,15 +19,33 @@
     \titlepage
 \end{frame}
 
-\begin{frame}{Color Test}
+\begin{frame}{Color Test: Base UiT Palette}
     \scriptsize
-    \begin{block}{UiT Color Palette}
-        \uitcolortest
-    \end{block}
+    \uitcolortest
+\end{frame}
 
-    \begin{block}{UiT Beamer Palette}
-        \uitcolortestbeamerpalette
-    \end{block}
+\begin{frame}{Color Test: Beamer Colors}
+    \scriptsize
+    \uitcolortestbeamerpalette
+    \smallskip
+
+    \begin{columns}
+        \begin{column}{0.30\textwidth}
+            \begin{block}{Test Block}
+                Test block
+            \end{block}
+        \end{column}
+        \begin{column}{0.30\textwidth}
+            \begin{alertblock}{Alert Block}
+                Alert block
+            \end{alertblock}
+        \end{column}
+        \begin{column}{0.30\textwidth}
+            \begin{exampleblock}{Example Block}
+                Example block
+            \end{exampleblock}
+        \end{column}
+    \end{columns}
 \end{frame}
 
 \end{document}
