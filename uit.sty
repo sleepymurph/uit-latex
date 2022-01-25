@@ -10,6 +10,9 @@
 \newif\if@uit@coated\@uit@coatedtrue
 \DeclareOption{uncoated}{\@uit@coatedfalse}
 
+\newif\if@uit@usecolortheme\@uit@usecolorthemefalse
+\DeclareOption{usecolortheme}{\@uit@usecolorthemetrue}
+
 \ProcessOptions\relax
 
 % This is for the grafiskprofil introduced in 2019 (see [Hva og hvorfor?]).
@@ -67,3 +70,83 @@
         \testcolor{UitYellow}
     \end{testcolors}
 }
+
+% Presentation colors
+% ------------------------------------------------------------
+%
+% The 2019 UiT PowerPoint template focuses entirely on the title page.
+% There isn't a master slide for normal slides.
+%
+% For the title page:
+%
+% The right half is 003349, the UitDarkBlue color.
+% The  left half is 004660, which is just a lightened version of that color.
+%
+% If we take that same step again we get 005971,
+% then 007282, which is very close to the 007396 of the UitMedBlue color.
+%
+% So these four steps are perfect for a four-color Beamer palette.
+%
+% "By default, the palette colors do not have a background and the foreground
+% ranges from structure.fg to black."
+
+\colorlet{UitPptBgRight}{UitDarkBlue}
+\definecolor{UitPptBgLeft}{HTML}{004660}
+
+\if@uit@usecolortheme
+\mode<presentation>
+    \setbeamercolor*{alerted text}      {fg=UitRed}
+    \setbeamercolor*{structure}         {fg=UitMedBlue!50!UitPptBgLeft}
+    \setbeamercolor*{palette primary}   {fg=UitMedBlue}
+    \setbeamercolor*{palette secondary} {fg=UitMedBlue!50!UitPptBgLeft}
+    \setbeamercolor*{palette tertiary}  {fg=UitPptBgLeft}
+    \setbeamercolor*{palette quaternary}{fg=UitDarkBlue}
+    \setbeamercolor*{titlelike}         {parent=palette primary}
+\mode<all>
+\fi
+
+\newcommand{\testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
+\newcommand{\showclr}[2]{%
+    \convertcolorspec{named}{#1}{#2}{\rgb}
+}
+
+\newcommand{\uitcolortestbeamerpalette}{%
+    \newcommand{\beamertestcolor}[1]{%
+        \usebeamercolor{##1}%
+        {\fboxsep\z@\fcolorbox{black}{fg}{\phantom{XX}}}
+        ##1 \testcolor{fg}%
+    }%
+    \newcommand{\testbeamercolor}[1]{%
+        ##1 &
+        \usebeamercolor{##1}\testclr{fg} \convertcolorspec{named}{fg}{HTML}\html \html &
+        \usebeamercolor{##1}\testclr{bg} \convertcolorspec{named}{bg}{HTML}\html \html \\
+    }%
+    \begin{tabular}{lll}
+        \bf color & \bf fg & \bf bg \\
+        \testbeamercolor{normal text}
+        \testbeamercolor{example text}
+        \testbeamercolor{alerted text}
+        \\
+        \testbeamercolor{structure}
+        \testbeamercolor{palette primary}
+        \testbeamercolor{palette secondary}
+        \testbeamercolor{palette tertiary}
+        \testbeamercolor{palette quaternary}
+    \end{tabular}
+}
+
+% Angled line / Skråelement
+% ------------------------------------------------------------
+%
+% The angled line is described on the Skråelement page.
+% They don't specify the angle but I know it refers to Tromsø's 69°40' latitude.
+% I remember reading somewhere that it should be 70° and not 69°,
+% but I can't find it now. I think it was on the old pages (2013 profile).
+%
+% I measured the PowerPoint background with Inkscape's measuring tool and
+% got 67.6°.
+%
+% There do not appear to be any restrictions on the position of the line
+% on the page, only that it must always lean to the right.
+%
+% [Skråelement]: https://uit.no/ansatte/grafiskprofil#innhold_631814

@@ -1,6 +1,9 @@
 # Output files
 *.pdf
 
+# Assets
+assets-original/
+
 # LaTeX temporary files
 *.aux
 *.log
