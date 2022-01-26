@@ -148,3 +148,44 @@
 % on the page, only that it must always lean to the right.
 %
 % [Skråelement]: https://uit.no/ansatte/grafiskprofil#innhold_631814
+
+\RequirePackage{tikz}
+\usetikzlibrary{calc}
+
+\newcommand{\uit@angle}{69} % nice
+\newlength{\uitanglestart}
+\setlength{\uitanglestart}{.25\paperwidth}
+
+\define@key{uitsplit}{south west}{\coordinate (south west) at (#1);}
+\define@key{uitsplit}{north east}{\coordinate (north east) at (#1);}
+\define@key{uitsplit}{left}{\def\left@dist{#1}}
+\define@key{uitsplit}{right fill}{\tikzset{right fill/.append style = {#1}}}
+\define@key{uitsplit}{left fill} {\tikzset{ left fill/.append style = {#1}}}
+\define@key{uitsplit}{angle draw}{\tikzset{angle draw/.append style = {#1}}}
+
+\newcommand\uitsplitbackground[1][]{
+    \begin{scope}
+        \tikzset{
+            right fill/.style   = UitDarkBlue,
+            left fill/.style    = UitDarkBlue!75!UitMedBlue,
+            angle draw/.style   = {white, line cap=rect},
+        }
+        \setkeys{uitsplit}{
+            south west  = current page.south west,
+            north east  = current page.north east,
+            left        = .25,
+        }
+        \setkeys{uitsplit}{#1}
+
+        \coordinate (south east) at (south west -| north east);
+        \coordinate (north west) at (south west |- north east);
+
+        \path[clip] (south west) rectangle (north east);
+
+        \path ($(south east)!\left@dist!(south west)$) coordinate (anglebottom);
+        \path (anglebottom) ++ (\uit@angle: 2\paperheight) coordinate (angletop);
+        \fill[right fill] (anglebottom) -- (angletop) -- (north east) -- (south east);
+        \fill[left fill]  (anglebottom) -- (angletop) -- (north west) -- (south west);
+        \draw[angle draw] (anglebottom) -- (angletop);
+    \end{scope}
+}

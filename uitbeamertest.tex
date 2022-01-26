@@ -91,4 +91,17 @@
     \end{block}
 \end{frame}
 
+\begin{frame}{Angle Test}
+    \begin{itemize}
+        \item The background can be drawn with different parameters\\
+            \tikz{\uitsplitbackground[north east = {4em,3em}]}
+            \tikz{\uitsplitbackground[
+                north east  = {4em,3em},
+                left        = .50,
+                right fill  = {opacity=.4},
+                angle draw  = {line width=5pt},
+            ]}
+    \end{itemize}
+\end{frame}
+
 \end{document}

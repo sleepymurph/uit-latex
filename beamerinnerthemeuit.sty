@@ -1,26 +1,8 @@
 
-\RequirePackage{tikz}
-
-\usepgfmodule{shapes}
-
 \defbeamertemplate*{title page}{uit}[1][]
 {
-  \newlength{\uitanglestart}
-  \setlength{\uitanglestart}{.25\paperwidth}
-  \newcommand{\uitangle}{69}
-
   \begin{tikzpicture}[remember picture, overlay]
-    \path (current page.south east)
-      ++ (-\uitanglestart, 0) coordinate (anglebottom)
-      ++ (\uitangle: 2\paperheight) coordinate (angletop)
-      ;
-    \fill[color=UitDarkBlue]
-      (anglebottom) -- (angletop)
-      -- (current page.north east) -- (current page.south east);
-    \fill[color=UitDarkBlue!75!UitMedBlue]
-      (anglebottom) -- (angletop)
-      -- (current page.north west) -- (current page.south west);
-    \draw[white] (anglebottom) -- (angletop);
+    \uitsplitbackground
   \end{tikzpicture}
 
   \vbox{}
