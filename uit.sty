@@ -32,11 +32,18 @@
 
 % Parameters: name, bestrøket, ubestrøket, RGB, HTML (order on the UiT web page)
 \newcommand{\uit@definecolor}[5]{%
-    % Explicitly set the lowercase 'rgb' definition from the 'RGB' definition.
-    % Otherwise, xcolor will calculate it from the 'cmyk' definition
-    % (because 'cmyk' is listed first) and come up with a different color.
-    \convertcolorspec{RGB}{#4}{rgb}{\rgb}
-    \definecolor{#1}{cmyk/RGB/HTML/rgb}{\if@uit@coated #2 \else #3 \fi / #4 / #5 / \rgb}
+    % Note: It is important to list an RGB-based definition first in the
+    % `\definecolor` declarations here. This is because xcolor takes the first
+    % color model given as the default natural color model for this color. We
+    % want that to default be the RGB version.
+    %
+    % If we put the CMYK definition first here, then xcolor will often end up
+    % recalculating RGB values from the CMYK definition, which results in
+    % something different than the explicit RGB definitions. In particular, the
+    % lighter blues come out looking turquoise.
+    %
+    %\definecolor{#1}{cmyk/RGB/HTML}{\if@uit@coated#2\else#3\fi / #4 / #5}   % turquoise
+    \definecolor{#1}{RGB/HTML/cmyk}{#4 / #5 / \if@uit@coated#2\else#3\fi}   % ok
 }
 
 \uit@definecolor{UitDarkBlue}
@@ -82,8 +89,8 @@
 % Color test helper
 % ------------------------------------------------------------
 
-\newcommand{\uitcolortest}{%
-    \begin{testcolors}[cmyk,RGB,HTML]
+\newcommand{\uitcolortest}[1][cmyk,RGB,HTML]{%
+    \begin{testcolors}[#1]
         \testcolor{UitDarkBlue}
         \testcolor{UitRed}
         \testcolor{UitMedBlue}
