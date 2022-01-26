@@ -3,12 +3,18 @@
 
 % Author: Mike Murphy <michael.j.murphy@uit.no>
 
-% Colors are specified in both coated (bestrøket) and uncoated (ubestrøket)
-% versions. My understanding is that this is for glossy vs matte paper.
-% Coated (bestøket) is the default since it is listed first on the color card.
-% To use the uncoated (ubestrøket) version of the color, use the option uncoated.
-\newif\if@uit@coated\@uit@coatedtrue
-\DeclareOption{uncoated}{\@uit@coatedfalse}
+% Option 'coatedpaper': use the versions of the colors intended for coated paper
+%
+% UiT's 2019 graphic profile specifies two sets of CMYK values for each of its
+% colors: "bestrøket" (coated) and "ubestrøket" (uncoated). This has to do with
+% the target paper: glossy or not. My understanding is that most regular office
+% paper is uncoated, so that is the default. The graphic designers making
+% glossy brochures will probably not be using LaTeX, but if they are, they can
+% specify the CMYK color mode (`\selectcolormode{cmyk}`) and load this package
+% with the `coatedpaper` option.
+% [UiTs fargepalett]: https://uit.no/ansatte/grafiskprofil#innhold_617372
+\newif\if@uit@coated\@uit@coatedfalse
+\DeclareOption{coatedpaper}{\@uit@coatedtrue}
 
 \ProcessOptions\relax
 
