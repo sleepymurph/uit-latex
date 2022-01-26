@@ -1,5 +1,11 @@
 \mode<presentation>
 
+% Option 'shadeblocks': use a darker background for blocks, similar to 'orchid'
+\newif\if@uit@shadeblocks\@uit@shadeblocksfalse
+\DeclareOptionBeamer{shadeblocks}{\@uit@shadeblockstrue}
+
+\ProcessOptionsBeamer\relax
+
 \RequirePackage{uit}
 
 % Presentation colors
@@ -38,7 +44,6 @@
 \setbeamercolor*{palette quaternary}{fg=white, bg=white!40!UitDarkBlue}
 
 \setbeamercolor*{structure}         {fg=UitMedBlue}
-%\setbeamercolor*{titlelike}         {parent=palette primary}
 
 % For reference, the 'infolines' outer theme uses
 %
@@ -55,6 +60,15 @@
 % ------------------------------------------------------------
 
 \setbeamercolor{block title}{parent=titlelike}
+
+\if@uit@shadeblocks
+    \setbeamercolor*{titlelike}         {parent=palette primary}
+
+    \setbeamercolor*{block title alerted}{fg=white, bg=alerted text.fg, use=alerted text}
+    \setbeamercolor*{block title example}{fg=white, bg=example text.fg, use=example text}
+\else
+\fi
+
 
 % From 'orchid': block bodies blend the respective title bg with the parent bg
 \setbeamercolor{block body}
