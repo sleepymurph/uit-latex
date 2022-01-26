@@ -1,21 +1,10 @@
 
-\newdimen\uit@logoheight
+\RequirePackage{uit}
 
 \defbeamertemplate*{title page}{uit}[1][]
 {
   \begin{tikzpicture}[remember picture, overlay]
-    \uitsplitbackground
-
-    % extract height by comparing points
-    % TODO: do this in a way that works with the !! syntax,
-    %   so I can specify .1 or 1cm
-    \pgfextracty{\uit@logoheight}{\pgfpointdiff
-      {\pgfpointanchor{current page}{south west}}
-      {\pgfpointanchor{current page}{north west}}}
-    \typeout{uit@logoheight \the\uit@logoheight}
-    \tikzset{shift=(current page.south west), x=(current page.south east), y=(current page.north west)}
-
-    \path (0,1) ++ (1em,-1em) node[anchor=north west]{\includegraphics[height=0.1\uit@logoheight]{assets/UiT_Logo_Eng_Hvit.pdf}};
+    \uitsplitbackground[logo=.5cm, logo margin=1em]
   \end{tikzpicture}
 
   \vbox{}
