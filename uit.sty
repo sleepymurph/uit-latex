@@ -154,15 +154,13 @@
 
 \newcommand{\uit@angle}{69}
 
-\newif\if@uit@logo
+% TODO: use pgfkeys for interface. See https://tex.stackexchange.com/a/27300/229926
 \define@key{uitsplit}{south west}   {\coordinate (south west) at (#1);}
 \define@key{uitsplit}{north east}   {\coordinate (north east) at (#1);}
 \define@key{uitsplit}{split pos}    {\def\uit@splitpos{#1}}
 \define@key{uitsplit}{right fill}   {\tikzset{right fill/.append style = {#1}}}
 \define@key{uitsplit}{left fill}    {\tikzset{ left fill/.append style = {#1}}}
 \define@key{uitsplit}{angle draw}   {\tikzset{angle draw/.append style = {#1}}}
-\define@key{uitsplit}{logo}    [7mm]{\@uit@logotrue \def\uit@logo@height{#1}}
-\define@key{uitsplit}{logo margin}  {\def\uit@logo@margin{#1}}
 
 \newcommand\uitsplitbackground[1][]{
     \begin{scope}
@@ -171,12 +169,10 @@
             left fill/.style    = UitDarkBlue!75!UitMedBlue,
             angle draw/.style   = {white, line cap=rect},
         }
-        \@uit@logofalse
         \setkeys{uitsplit}{
             south west  = current page.south west,
             north east  = current page.north east,
             split pos   = .66,
-            logo margin = .01,
         }
         \setkeys{uitsplit}{#1}
 
@@ -192,19 +188,5 @@
         \fill[left fill]  (anglebottom) -- (angletop) -- (north west) -- (south west);
         \draw[angle draw] (anglebottom) -- (angletop);
 
-        % Set coordinate system so (0,0) is south west and (1,1) is north east.
-        %
-        % Note that it is important to calculate the split angle BEFORE
-        % putting this in place, or else the aspect ratio will affect the angle.
-        %
-        % It is also important to install the 'clip' path BEFORE calculating
-        % the angle point, since it's so far out of bounds.
-        \tikzset{shift=(south west), x=(south east), y=(north west)}
-
-        \if@uit@logo
-            \path (0,1) ++ (\uit@logo@margin, -\uit@logo@margin) coordinate (logo north west);
-            \node[anchor=north west] at (logo north west)
-              {\includegraphics[height=\uit@logo@height]{assets/UiT_Logo_Eng_Hvit.pdf}};
-        \fi
     \end{scope}
 }

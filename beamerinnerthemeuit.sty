@@ -1,29 +1,30 @@
 
-\newcommand\uit@titlesplitpos{.66}
-\DeclareOptionBeamer{titlesplitpos}{\renewcommand\uit@titlesplitpos{#1}}
-
-\newcommand\uit@logoheight{7mm}
-\DeclareOptionBeamer{logoheight}{\renewcommand\uit@logoheight{#1}}
-
-\ProcessOptionsBeamer
-
 \RequirePackage{uit}
+
+% TODO: use pgfkeys for interface so that I can pass other options
+\mode<presentation>
 
 \defbeamertemplate*{title page}{uit}[1][]
 {
   \begin{tikzpicture}[remember picture, overlay]
-    \uitsplitbackground[
-      split pos=\uit@titlesplitpos,
-      logo=\uit@logoheight,
-      logo margin=1em,
-    ]
+    \ifx\inserttitlegraphic\empty
+      \uitsplitbackground
+    \else
+      \tikzset{no sep/.style = {inner sep=0, outer sep=0}}
+      \path (current page.east)
+        node[anchor=east, no sep] {\inserttitlegraphic};
+      \uitsplitbackground[right fill={opacity=0}]
+    \fi
+
+    \path (current page.north west) ++ (1em, -1em)
+      node[anchor=north west]
+          {\includegraphics[height=.1\paperheight]{assets/UiT_Logo_Eng_Hvit.pdf}};
   \end{tikzpicture}
 
   \vbox{}
   \vfill
   \begingroup
     \setbeamercolor*{title}{fg=white}
-    \setbeamercolor*{subtitle}{fg=white}
     \setbeamercolor*{author}{fg=white}
     \setbeamercolor*{institute}{fg=white}
     \setbeamercolor*{date}{fg=white}
@@ -46,9 +47,10 @@
     \begin{beamercolorbox}[sep=8pt,#1]{date}
       \usebeamerfont{date}\insertdate
     \end{beamercolorbox}\vskip0.5em
-    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    %{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
   \endgroup
   \vfill
 }
 
+\mode<all>
 % vim: set sw=2 :
