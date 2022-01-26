@@ -1,0 +1,58 @@
+
+\RequirePackage{tikz}
+
+\usepgfmodule{shapes}
+
+\defbeamertemplate*{title page}{uit}[1][]
+{
+  \newlength{\uitanglestart}
+  \setlength{\uitanglestart}{.25\paperwidth}
+  \newcommand{\uitangle}{69}
+
+  \begin{tikzpicture}[remember picture, overlay]
+    \path (current page.south east)
+      ++ (-\uitanglestart, 0) coordinate (anglebottom)
+      ++ (\uitangle: 2\paperheight) coordinate (angletop)
+      ;
+    \fill[color=UitDarkBlue]
+      (anglebottom) -- (angletop)
+      -- (current page.north east) -- (current page.south east);
+    \fill[color=UitDarkBlue!75!UitMedBlue]
+      (anglebottom) -- (angletop)
+      -- (current page.north west) -- (current page.south west);
+    \draw[white] (anglebottom) -- (angletop);
+  \end{tikzpicture}
+
+  \vbox{}
+  \vfill
+  \begingroup
+    \setbeamercolor*{title}{fg=white}
+    \setbeamercolor*{subtitle}{fg=white}
+    \setbeamercolor*{author}{fg=white}
+    \setbeamercolor*{institute}{fg=white}
+    \setbeamercolor*{date}{fg=white}
+
+    \begin{beamercolorbox}[sep=8pt,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \vskip1em\par
+    \begin{beamercolorbox}[sep=8pt,#1]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,#1]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
+    \begin{beamercolorbox}[sep=8pt,#1]{date}
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}\vskip0.5em
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \endgroup
+  \vfill
+}
+
+% vim: set sw=2 :
