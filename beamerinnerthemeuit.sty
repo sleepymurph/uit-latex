@@ -1,10 +1,14 @@
 
+\newcommand\@uit@title@split@pos{.66}
+\DeclareOptionBeamer{titlesplitpos}{\renewcommand\@uit@title@split@pos{#1}}
+\ProcessOptionsBeamer
+
 \RequirePackage{uit}
 
 \defbeamertemplate*{title page}{uit}[1][]
 {
   \begin{tikzpicture}[remember picture, overlay]
-    \uitsplitbackground[logo=.5cm, logo margin=1em]
+    \uitsplitbackground[split pos=\@uit@title@split@pos, logo=.5cm, logo margin=1em]
   \end{tikzpicture}
 
   \vbox{}

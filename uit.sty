@@ -152,14 +152,12 @@
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
 
-\newcommand{\uit@angle}{69} % nice
-\newlength{\uitanglestart}
-\setlength{\uitanglestart}{.25\paperwidth}
+\newcommand{\uit@angle}{69}
 
 \newif\if@uit@logo
 \define@key{uitsplit}{south west}   {\coordinate (south west) at (#1);}
 \define@key{uitsplit}{north east}   {\coordinate (north east) at (#1);}
-\define@key{uitsplit}{left}         {\def\left@dist{#1}}
+\define@key{uitsplit}{split pos}    {\def\@uit@split@pos{#1}}
 \define@key{uitsplit}{right fill}   {\tikzset{right fill/.append style = {#1}}}
 \define@key{uitsplit}{left fill}    {\tikzset{ left fill/.append style = {#1}}}
 \define@key{uitsplit}{angle draw}   {\tikzset{angle draw/.append style = {#1}}}
@@ -177,7 +175,7 @@
         \setkeys{uitsplit}{
             south west  = current page.south west,
             north east  = current page.north east,
-            left        = .25,
+            split pos   = .66,
             logo margin = .01,
         }
         \setkeys{uitsplit}{#1}
@@ -190,7 +188,7 @@
 
         \path[clip] (0,0) rectangle (1,1);
 
-        \path (1-\left@dist,0) coordinate (anglebottom);
+        \path (\@uit@split@pos,0) coordinate (anglebottom);
         \path (anglebottom) ++ (\uit@angle:2) coordinate (angletop);
         \fill[right fill] (anglebottom) -- (angletop) -- (1,1) -- (1,0);
         \fill[left fill]  (anglebottom) -- (angletop) -- (0,1) -- (0,0);
