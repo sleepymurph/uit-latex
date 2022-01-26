@@ -180,12 +180,15 @@
         \coordinate (south east) at (south west -| north east);
         \coordinate (north west) at (south west |- north east);
 
-        \path[clip] (south west) rectangle (north east);
+        % Set coordinate system so (0,0) is south west and (1,1) is north east
+        \tikzset{shift=(south west), x=(south east), y=(north west)}
 
-        \path ($(south east)!\left@dist!(south west)$) coordinate (anglebottom);
-        \path (anglebottom) ++ (\uit@angle: 2\paperheight) coordinate (angletop);
-        \fill[right fill] (anglebottom) -- (angletop) -- (north east) -- (south east);
-        \fill[left fill]  (anglebottom) -- (angletop) -- (north west) -- (south west);
+        \path[clip] (0,0) rectangle (1,1);
+
+        \path (1-\left@dist,0) coordinate (anglebottom);
+        \path (anglebottom) ++ (\uit@angle:2) coordinate (angletop);
+        \fill[right fill] (anglebottom) -- (angletop) -- (1,1) -- (1,0);
+        \fill[left fill]  (anglebottom) -- (angletop) -- (0,1) -- (0,0);
         \draw[angle draw] (anglebottom) -- (angletop);
     \end{scope}
 }

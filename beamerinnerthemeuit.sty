@@ -13,7 +13,9 @@
       {\pgfpointanchor{current page}{south west}}
       {\pgfpointanchor{current page}{north west}}}
     \typeout{uit@logoheight \the\uit@logoheight}
-    \path ($(current page.north west)!.01!(current page.south east)$) node[anchor=north west]{\includegraphics[height=0.1\uit@logoheight]{assets/UiT_Logo_Eng_Hvit.pdf}};
+    \tikzset{shift=(current page.south west), x=(current page.south east), y=(current page.north west)}
+
+    \path (0,1) ++ (1em,-1em) node[anchor=north west]{\includegraphics[height=0.1\uit@logoheight]{assets/UiT_Logo_Eng_Hvit.pdf}};
   \end{tikzpicture}
 
   \vbox{}
