@@ -30,12 +30,14 @@
 \setbeamercolor*{alerted text}      {fg=UitRed}
 \setbeamercolor*{example text}      {fg=UitYellow}
 
-\setbeamercolor*{palette primary}   {fg=white, bg=UitMedBlue}
-\setbeamercolor*{palette secondary} {fg=white, bg=UitMedBlue!66!UitDarkBlue}
-\setbeamercolor*{palette tertiary}  {fg=white, bg=UitMedBlue!33!UitDarkBlue}
-\setbeamercolor*{palette quaternary}{fg=white, bg=UitDarkBlue}
+% Going dark to light like this will, when reversed in 'infolines',
+% result in a gradient similar to the PowerPoint template
+\setbeamercolor*{palette primary}   {fg=white, bg=white!00!UitDarkBlue}
+\setbeamercolor*{palette secondary} {fg=white, bg=white!10!UitDarkBlue}
+\setbeamercolor*{palette tertiary}  {fg=white, bg=white!20!UitDarkBlue}
+\setbeamercolor*{palette quaternary}{fg=white, bg=white!60!UitDarkBlue}
 
-\setbeamercolor*{structure}         {fg=UitMedBlue}
+\setbeamercolor*{structure}         {fg=white!20!UitDarkBlue}
 %\setbeamercolor*{titlelike}         {parent=palette primary}
 
 % For reference, the 'infolines' outer theme uses
