@@ -4,6 +4,7 @@ default: assets2019 uitbeamertest.pdf
 
 %.pdf: %.tex $(wildcard *.sty)
 	pdflatex -halt-on-error $<
+	pdflatex -halt-on-error $<
 
 
 # Assets

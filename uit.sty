@@ -58,6 +58,23 @@
     {0.00, 0.31, 0.90, 0.00}
     {242, 169, 0} {F2A900}
 
+% Link colors
+% ------------------------------------------------------------
+
+\colorlet{uitlinkcolor}{UitRed!70!black}
+\colorlet{uiturlcolor}{UitMedBlue!33!UitDarkBlue}
+\newcommand{\uitlinkcolors}{%
+    \hypersetup{
+        linkcolor=uitlinkcolor,
+        citecolor=uitlinkcolor,
+        urlcolor=uiturlcolor,
+        filecolor=uitlinkcolor,
+    }
+}
+
+% Color test helper
+% ------------------------------------------------------------
+
 \newcommand{\uitcolortest}{%
     \begin{testcolors}[cmyk,RGB,HTML]
         \testcolor{UitDarkBlue}
@@ -66,6 +83,40 @@
         \testcolor{UitLightBlue}
         \testcolor{UitYellow}
     \end{testcolors}
+}
+
+% Beamer color test helper
+% ------------------------------------------------------------
+
+% Adapted from the xcolor source
+\newcommand{\uit@testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
+
+\newcommand{\uitcolortestbeamerpalette}{%
+    \newcommand{\testbeamercolor}[1]{%
+        ##1 &
+        \usebeamercolor{##1}\uit@testclr{fg} \convertcolorspec{named}{fg}{HTML}\html \html &
+        \usebeamercolor{##1}\uit@testclr{bg} \convertcolorspec{named}{bg}{HTML}\html \html &
+        \usebeamercolor{##1}\fboxsep 1pt \colorbox{bg}{\textcolor{fg}{##1}} \\
+    }%
+    \begin{tabular}{llll}
+        \bf color & \bf fg & \bf bg & \bf sample \\
+        \testbeamercolor{normal text}
+        \testbeamercolor{alerted text}
+        \testbeamercolor{example text}
+        \\
+        \testbeamercolor{structure}
+        \testbeamercolor{palette primary}
+        \testbeamercolor{palette secondary}
+        \testbeamercolor{palette tertiary}
+        \testbeamercolor{palette quaternary}
+        \\
+        \testbeamercolor{block title}
+        \testbeamercolor{block body}
+        \testbeamercolor{block title alerted}
+        \testbeamercolor{block body alerted}
+        \testbeamercolor{block title example}
+        \testbeamercolor{block body example}
+    \end{tabular}
 }
 
 % Angled line / Skråelement

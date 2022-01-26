@@ -2,16 +2,15 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-
 \title{Test UiT Beamer Presentation}
 \author{Michael J. Murphy}
 
 \usepackage[default]{opensans}
 
-\selectcolormodel{rgb}
-
 \useoutertheme{infolines}
 \usecolortheme{uit}
+
+\hypersetup{colorlinks}
 
 \begin{document}
 
@@ -19,10 +18,17 @@
     \titlepage
 \end{frame}
 
+\section{Color Tests}
+
+\subsection{Basic Colors}
+
 \begin{frame}{Color Test: Base UiT Palette}
     \scriptsize
     \uitcolortest
 \end{frame}
+
+\subsection{Beamer Colors}
+\label{beamercolortest}
 
 \begin{frame}{Color Test: Beamer Colors}
     \scriptsize
@@ -46,6 +52,35 @@
             \end{exampleblock}
         \end{column}
     \end{columns}
+\end{frame}
+
+\begin{frame}{Color Test: Hyperlinks}
+
+    \begingroup
+        \scriptsize
+        \begin{testcolors}[cmyk,RGB,HTML]
+            \testcolor{uitlinkcolor}
+            \testcolor{uiturlcolor}
+        \end{testcolors}
+    \endgroup
+
+    \medskip
+
+    \begin{itemize}
+        \item Example internal ref to \hyperref[beamercolortest]{Beamer Color Test}
+        \item Example URL \url{https://www.ctan.org/pkg/beamer}
+        \item Example citation \cite{aa}
+        \item Example file ref \url{uit.sty}
+    \end{itemize}
+
+    \medskip
+
+    \begin{block}{The Bibliography Block}
+        \begin{thebibliography}{1}
+            \bibitem{aa} Jane Doe. "An example bibliography entry."
+                \url{https://www.ctan.org/pkg/beamer}
+        \end{thebibliography}
+    \end{block}
 \end{frame}
 
 \end{document}

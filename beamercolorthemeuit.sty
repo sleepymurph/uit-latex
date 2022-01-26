@@ -66,38 +66,11 @@
 % by blending the 'structure' color with black
 
 
-% Color test helper
+% Hyperlink colors
 % ------------------------------------------------------------
-
-% Adapted from the xcolor source
-\newcommand{\uit@testclr}[1]{\fboxsep\z@\fcolorbox{black}{#1}{\phantom{XX}}}
-
-\newcommand{\uitcolortestbeamerpalette}{%
-    \newcommand{\testbeamercolor}[1]{%
-        ##1 &
-        \usebeamercolor{##1}\uit@testclr{fg} \convertcolorspec{named}{fg}{HTML}\html \html &
-        \usebeamercolor{##1}\uit@testclr{bg} \convertcolorspec{named}{bg}{HTML}\html \html &
-        \usebeamercolor{##1}\fboxsep 1pt \colorbox{bg}{\textcolor{fg}{##1}} \\
-    }%
-    \begin{tabular}{llll}
-        \bf color & \bf fg & \bf bg & \bf sample \\
-        \testbeamercolor{normal text}
-        \testbeamercolor{alerted text}
-        \testbeamercolor{example text}
-        \\
-        \testbeamercolor{structure}
-        \testbeamercolor{palette primary}
-        \testbeamercolor{palette secondary}
-        \testbeamercolor{palette tertiary}
-        \testbeamercolor{palette quaternary}
-        \\
-        \testbeamercolor{block title}
-        \testbeamercolor{block body}
-        \testbeamercolor{block title alerted}
-        \testbeamercolor{block body alerted}
-        \testbeamercolor{block title example}
-        \testbeamercolor{block body example}
-    \end{tabular}
-}
+% Use the colors defined in the uit package
+% But clear the internal link color so that it doesn't affect titles and tocs
+\uitlinkcolors
+\hypersetup{linkcolor=,}
 
 \mode<all>
