@@ -1,20 +1,24 @@
 
 \RequirePackage{uit}
 
-% TODO: use pgfkeys for interface so that I can pass other options
+\mode<all>
+{
+  \newcommand\titlesplitoptions[1]{\tikzset{title split/.style = {#1}}}
+  \titlesplitoptions{}
+}
+
 \mode<presentation>
 
 \defbeamertemplate*{title page}{uit}[1][]
 {
   \begin{tikzpicture}[remember picture, overlay]
     \ifx\inserttitlegraphic\empty
-      \uitsplitbackground{current page.south west}{current page.north east}
+      \uitsplitbackground[title split]{current page.south west}{current page.north east}
     \else
       \tikzset{no sep/.style = {inner sep=0, outer sep=0}}
       \path (current page.east)
         node[anchor=east, no sep] {\inserttitlegraphic};
-      \uitsplitbackground[split right/.style = {}]
-        {current page.south west}{current page.north east}
+      \uitsplitbackground[split right/.style = {}, title split]{current page.south west}{current page.north east}
     \fi
 
     \path (current page.north west) ++ (1em, -1em)
