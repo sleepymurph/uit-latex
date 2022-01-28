@@ -2,7 +2,8 @@
 *.pdf
 
 # Assets
-assets-original/
+assets-download/
+example-art/
 
 # LaTeX temporary files
 *.aux
