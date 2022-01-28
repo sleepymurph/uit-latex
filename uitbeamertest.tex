@@ -95,7 +95,7 @@
 
 \begin{frame}{Angle Test}
     \begin{itemize}
-        \item The background can be drawn with different parameters\\
+        \item The split can be drawn with different parameters\\
             \tikz{\uitsplitbackground{0,0}{4em, 3em}}
             \tikz{\uitsplitbackground[
                     split pos = .25,
@@ -105,6 +105,28 @@
                     opacity=.6,
                     line width = 1em,
                 ]{0,0}{4em, 3em}}
+
+        \item The split can be placed with transparency on top of a picture,\\
+            like in \href{https://uit.no/ansatte/grafiskprofil\#innhold_631815}{UiT's examples}\\
+
+            \begin{tikzpicture}
+                \node[inner sep=0, outer sep=0] (bg)
+                    {\includegraphics[height=5em]{example-art/cmb-timeline-bg.jpg}};
+                \uitsplitbackground[
+                    split pos = .55,
+                    split left/.style = {},
+                    split right/.append style = {color=UitRed, opacity=.4},
+                    ]{bg.south west}{bg.north east}
+            \end{tikzpicture}
+            \begin{tikzpicture}
+                \node[inner sep=0, outer sep=0] (bg)
+                    {\includegraphics[height=5em]{example-art/cmb-timeline-bg.jpg}};
+                \uitsplitbackground[
+                    split pos = .75,
+                    split left/.style = {},
+                    split right/.append style = {color=UitYellow, opacity=.4},
+                    ]{bg.south west}{bg.north east}
+            \end{tikzpicture}
     \end{itemize}
 \end{frame}
 

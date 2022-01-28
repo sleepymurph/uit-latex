@@ -174,8 +174,8 @@
         \path ($(south west)!\splitpos!(south east)$)   coordinate (anglebottom);
         \path (anglebottom) ++ (\uit@angle: 2\paperheight) coordinate (angletop);
 
-        \path[#1, split right] (anglebottom) -- (angletop) -- (north east) -- (south east);
-        \path[#1, split left ] (anglebottom) -- (angletop) -- (north west) -- (south west);
-        \draw[#1, split line ] (anglebottom) -- (angletop);
+        \path[split right] (anglebottom) -- (angletop) -- (north east) -- (south east);
+        \path[split left ] (anglebottom) -- (angletop) -- (north west) -- (south west);
+        \path[split line ] (anglebottom) -- (angletop);
     \end{scope}
 }

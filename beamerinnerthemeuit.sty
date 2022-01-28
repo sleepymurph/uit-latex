@@ -3,6 +3,7 @@
 
 \mode<all>
 {
+  % User command: \titlesplitoptions. Give tikz keys to pass to the title split.
   \newcommand\titlesplitoptions[1]{\tikzset{title split/.style = {#1}}}
   \titlesplitoptions{}
 }
@@ -13,12 +14,18 @@
 {
   \begin{tikzpicture}[remember picture, overlay]
     \ifx\inserttitlegraphic\empty
-      \uitsplitbackground[title split]{current page.south west}{current page.north east}
+      \uitsplitbackground
+        [title split]
+        {current page.south west}
+        {current page.north east}
     \else
-      \tikzset{no sep/.style = {inner sep=0, outer sep=0}}
+      % Anchor title graphic to the center right of the page
       \path (current page.east)
-        node[anchor=east, no sep] {\inserttitlegraphic};
-      \uitsplitbackground[split right/.style = {}, title split]{current page.south west}{current page.north east}
+        node [anchor=east, inner sep=0, outer sep=0] {\inserttitlegraphic};
+      \uitsplitbackground
+        [split right/.style = {}, title split]
+        {current page.south west}
+        {current page.north east}
     \fi
 
     \path (current page.north west) ++ (1em, -1em)
