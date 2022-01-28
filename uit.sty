@@ -162,6 +162,32 @@
 \define@key{uitsplit}{left fill}    {\tikzset{ left fill/.append style = {#1}}}
 \define@key{uitsplit}{angle draw}   {\tikzset{angle draw/.append style = {#1}}}
 
+\newcommand\uitsplitbackgroundx[3][]{
+    \begin{scope}[
+            split pos/.store in = \splitpos,
+            split pos           = .66,
+            split left/.style   = { fill, color=UitDarkBlue!75!UitMedBlue },
+            split right/.style  = { fill, color=UitDarkBlue },
+            split line/.style   = { draw, color=white, line cap=rect },
+        ]
+        \tikzset{#1}
+        \coordinate (south west) at (#2);
+        \coordinate (north east) at (#3);
+
+        \path[clip] (south west) rectangle (north east);
+
+        \coordinate (south east) at (south west -| north east);
+        \coordinate (north west) at (south west |- north east);
+
+        \path ($(south west)!\splitpos!(south east)$)   coordinate (anglebottom);
+        \path (anglebottom) ++ (\uit@angle: 2\paperheight) coordinate (angletop);
+
+        \path[#1, split right] (anglebottom) -- (angletop) -- (north east) -- (south east);
+        \path[#1, split left ] (anglebottom) -- (angletop) -- (north west) -- (south west);
+        \draw[#1, split line ] (anglebottom) -- (angletop);
+    \end{scope}
+}
+
 \newcommand\uitsplitbackground[1][]{
     \begin{scope}
         \tikzset{
