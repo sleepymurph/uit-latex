@@ -8,12 +8,12 @@
 {
   \begin{tikzpicture}[remember picture, overlay]
     \ifx\inserttitlegraphic\empty
-      \uitsplitbackgroundx{current page.south west}{current page.north east}
+      \uitsplitbackground{current page.south west}{current page.north east}
     \else
       \tikzset{no sep/.style = {inner sep=0, outer sep=0}}
       \path (current page.east)
         node[anchor=east, no sep] {\inserttitlegraphic};
-      \uitsplitbackgroundx[split right/.style = {}]
+      \uitsplitbackground[split right/.style = {}]
         {current page.south west}{current page.north east}
     \fi
 

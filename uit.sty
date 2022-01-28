@@ -154,15 +154,7 @@
 
 \newcommand{\uit@angle}{69}
 
-% TODO: use pgfkeys for interface. See https://tex.stackexchange.com/a/27300/229926
-\define@key{uitsplit}{south west}   {\coordinate (south west) at (#1);}
-\define@key{uitsplit}{north east}   {\coordinate (north east) at (#1);}
-\define@key{uitsplit}{split pos}    {\def\uit@splitpos{#1}}
-\define@key{uitsplit}{right fill}   {\tikzset{right fill/.append style = {#1}}}
-\define@key{uitsplit}{left fill}    {\tikzset{ left fill/.append style = {#1}}}
-\define@key{uitsplit}{angle draw}   {\tikzset{angle draw/.append style = {#1}}}
-
-\newcommand\uitsplitbackgroundx[3][]{
+\newcommand\uitsplitbackground[3][]{
     \begin{scope}[
             split pos/.store in = \splitpos,
             split pos           = .66,
@@ -185,34 +177,5 @@
         \path[#1, split right] (anglebottom) -- (angletop) -- (north east) -- (south east);
         \path[#1, split left ] (anglebottom) -- (angletop) -- (north west) -- (south west);
         \draw[#1, split line ] (anglebottom) -- (angletop);
-    \end{scope}
-}
-
-\newcommand\uitsplitbackground[1][]{
-    \begin{scope}
-        \tikzset{
-            right fill/.style   = UitDarkBlue,
-            left fill/.style    = UitDarkBlue!75!UitMedBlue,
-            angle draw/.style   = {white, line cap=rect},
-        }
-        \setkeys{uitsplit}{
-            south west  = current page.south west,
-            north east  = current page.north east,
-            split pos   = .66,
-        }
-        \setkeys{uitsplit}{#1}
-
-        \coordinate (south east) at (south west -| north east);
-        \coordinate (north west) at (south west |- north east);
-
-        \path[clip] (south west) rectangle (north east);
-
-        \path ($(south west)!\uit@splitpos!(south east)$) coordinate (anglebottom);
-        \path (anglebottom) ++ (\uit@angle: 2\paperheight) coordinate (angletop);
-
-        \fill[right fill] (anglebottom) -- (angletop) -- (north east) -- (south east);
-        \fill[left fill]  (anglebottom) -- (angletop) -- (north west) -- (south west);
-        \draw[angle draw] (anglebottom) -- (angletop);
-
     \end{scope}
 }
