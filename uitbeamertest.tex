@@ -105,6 +105,7 @@
                     opacity=.6,
                     line width = 1em,
                 ]{0,0}{4em, 3em}}
+            \tikz{\uitsplitbackground[split rays=true]{0,0}{4em, 3em}}
 
         \item The split can be placed with transparency, like in
             \href{https://uit.no/ansatte/grafiskprofil\#innhold_631815}{UiT's examples}\\
@@ -127,6 +128,25 @@
                     split right/.append style = {color=UitYellow, opacity=.4},
                     ]{bg.south west}{bg.north east}
             \end{tikzpicture}
+            \begin{tikzpicture}
+                \node[inner sep=0, outer sep=0] (bg)
+                    {\includegraphics[height=5em]{example-art/csiro-five-antennas-bg.jpg}};
+                \uitsplitbackground[
+                    split pos=.33,
+                    split rays=true,
+                    split right/.style = {},
+                    split ray right/.style = {},
+                    ]{bg.south west}{bg.north east}
+            \end{tikzpicture}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Rays Test}
+    \begin{itemize}
+        \item Here are the rays by themselves, without being cut off by the background
+            \tikz{\uitsplitrays{0,0}{4em}}
+            \tikz{\uitsplitrays[split ray/.append style={color=UitYellow}]{0,0}{4em}}
+            \tikz{\uitsplitrays[split ray/.append style={color=UitRed}]{0,0}{4em}}
     \end{itemize}
 \end{frame}
 

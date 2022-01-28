@@ -15,7 +15,7 @@
   \begin{tikzpicture}[remember picture, overlay]
     \ifx\inserttitlegraphic\empty
       \uitsplitbackground
-        [title split]
+        [split rays=true, title split]
         {current page.south west}
         {current page.north east}
     \else
@@ -23,7 +23,7 @@
       \path (current page.east)
         node [anchor=east, inner sep=0, outer sep=0] {\inserttitlegraphic};
       \uitsplitbackground
-        [split right/.style = {}, title split]
+        [split rays=true, split right/.style={}, split ray right/.style={}, title split]
         {current page.south west}
         {current page.north east}
     \fi

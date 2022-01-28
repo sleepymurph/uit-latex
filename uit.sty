@@ -151,8 +151,10 @@
 
 \RequirePackage{tikz}
 \usetikzlibrary{calc}
+\usetikzlibrary{fadings}
 
 \newcommand{\uit@angle}{69}
+\newif\if@uit@splitrays \@uit@splitraysfalse
 
 \newcommand\uitsplitbackground[3][]{
     \begin{scope}[
@@ -160,11 +162,17 @@
             split pos           = .66,
             split left/.style   = { fill, color=UitDarkBlue!75!UitMedBlue },
             split right/.style  = { fill, color=UitDarkBlue },
-            split line/.style   = { draw, color=white, line cap=rect },
+            split line/.style   = { draw, color=white, line cap=rect, line width=.05em },
+            split rays/.is if   = @uit@splitrays,
+            split rays          = false,
         ]
         \tikzset{#1}
         \coordinate (south west) at (#2);
         \coordinate (north east) at (#3);
+
+        \pgfextracty{\dimen1}{\pgfpointanchor{south west}{center}}
+        \pgfextracty{\dimen0}{\pgfpointanchor{north east}{center}}
+        \pgfmathsetlengthmacro{\bgheight}{\the\dimen0 - \the\dimen1}
 
         \path[clip] (south west) rectangle (north east);
 
@@ -172,10 +180,66 @@
         \coordinate (north west) at (south west |- north east);
 
         \path ($(south west)!\splitpos!(south east)$)   coordinate (anglebottom);
-        \path (anglebottom) ++ (\uit@angle: 2\paperheight) coordinate (angletop);
+        \path (anglebottom) ++ (\uit@angle: 1.5*\bgheight) coordinate (angletop);
 
         \path[split right] (anglebottom) -- (angletop) -- (north east) -- (south east);
         \path[split left ] (anglebottom) -- (angletop) -- (north west) -- (south west);
+        \if@uit@splitrays
+            \uitsplitrays[#1]{anglebottom}{\bgheight}
+        \fi
         \path[split line ] (anglebottom) -- (angletop);
+    \end{scope}
+}
+
+% Decorative element / Profilelement
+% ------------------------------------------------------------
+%
+% [Profilelement]: https://uit.no/ansatte/grafiskprofil#innhold_617374
+
+\newcommand\uitsplitrays[3][]{
+    \begin{scope}
+        \tikzset{#1}
+        \coordinate (anglebottom) at (#2);
+        \pgfmathsetlengthmacro{\bgheight}{#3}
+
+        \pgfmathsetlengthmacro{\raydepth}{\bgheight * .3}
+        \pgfmathsetlengthmacro{\rayradius}{\bgheight * .03}
+
+        \path (anglebottom) ++ (\uit@angle: -\raydepth) coordinate (ray origin);
+
+        \foreach \angle/\len in {1/2, 1.2/2.2, 1.5/2.5, 1.8/1.8, 6/.03, 5.5/2, 7.5/.60, 11/1.5, 15/.4} {
+            \uitsplitray[#1, split ray left]
+                {ray origin}{\uit@angle+\angle}{\len*\bgheight + \raydepth}{\rayradius}
+        }
+        \foreach \angle/\len in {1.5/3, 3.4/1.3, 5/1.5, 6.2/1.2, 6.3/.20, 11/.5} {
+            \uitsplitray[#1, split ray right]
+                {ray origin}{\uit@angle-\angle}{\len*\bgheight + \raydepth}{\rayradius}
+        }
+    \end{scope}
+}
+
+\newcommand\uitsplitray[5][]{
+    \begin{scope}[
+            split ray/.style = {fill, color=UitLightBlue, opacity=.2, path fading=west},
+            split ray left/.style = {split ray},
+            split ray right/.style = {split ray},
+        ]
+        \tikzset{#1}
+        \coordinate (ray origin) at (#2);
+        \pgfmathsetmacro{\rayangle}{#3}
+        \pgfmathsetlengthmacro{\raylen}{#4}
+        \pgfmathsetlengthmacro{\rayradius}{#5}
+
+        \tikzset{split ray/.append style = {fading angle=\rayangle}}
+
+        \path (ray origin) -- ++(\rayangle: \raylen)
+            node[circle, minimum size=2*\rayradius, outer sep=0, inner sep=0, transform shape] (ray tip) {};
+
+        \path[#1] (ray origin)
+            -- (tangent cs:node=ray tip, point={(ray origin)}, solution=1)
+            -- (tangent cs:node=ray tip, point={(ray origin)}, solution=2)
+            -- cycle
+            (ray tip) circle(\rayradius)
+            ;
     \end{scope}
 }
