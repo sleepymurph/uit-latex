@@ -10,58 +10,53 @@
 
 \mode<presentation>
 
+% Set color of all title page text
+\setbeamercolor*{title}     {fg=white}
+\setbeamercolor*{author}    {parent=title}
+\setbeamercolor*{date}      {parent=title}
+\setbeamercolor*{institute} {parent=title}
+
 \defbeamertemplate*{title page}{uit}[1][]
 {
+  % Draw background
   \begin{tikzpicture}[remember picture, overlay]
+
+    % If \titlegraphic was not set, draw the default background
     \ifx\inserttitlegraphic\empty
       \uitsplitbackground
         [split rays=true, title split]
         {current page.south west}
         {current page.north east}
+
+    % If there is a \titlegraphic, do not draw the right side of the split
     \else
       % Anchor title graphic to the center right of the page
       \path (current page.east)
         node [anchor=east, inner sep=0, outer sep=0] {\inserttitlegraphic};
+
+      % Draw background with right-side background and rays turned off
+      \tikzset{clear split right/.style = {
+        split right/.style={}, split ray right/.style={},
+      }}
       \uitsplitbackground
-        [split rays=true, split right/.style={}, split ray right/.style={}, title split]
+        [split rays=true, clear split right, title split]
         {current page.south west}
         {current page.north east}
     \fi
 
+    % Add the logo in the top left
     \path (current page.north west) ++ (1em, -1em)
       node[anchor=north west]
           {\includegraphics[height=.1\paperheight]{assets/UiT_Logo_Eng_Hvit.pdf}};
   \end{tikzpicture}
 
-  \vbox{}
-  \vfill
+  % For the rest of the title page, defer to the default template (left-aligned)
   \begingroup
-    \setbeamercolor*{title}{fg=white}
-    \setbeamercolor*{author}{fg=white}
-    \setbeamercolor*{institute}{fg=white}
-    \setbeamercolor*{date}{fg=white}
-
-    \begin{beamercolorbox}[sep=8pt,#1]{title}
-      \usebeamerfont{title}\inserttitle\par%
-      \ifx\insertsubtitle\@empty%
-      \else%
-        \vskip0.25em%
-        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-      \fi%     
-    \end{beamercolorbox}%
-    \vskip1em\par
-    \begin{beamercolorbox}[sep=8pt,#1]{author}
-      \usebeamerfont{author}\insertauthor
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=8pt,#1]{institute}
-      \usebeamerfont{institute}\insertinstitute
-    \end{beamercolorbox}
-    \begin{beamercolorbox}[sep=8pt,#1]{date}
-      \usebeamerfont{date}\insertdate
-    \end{beamercolorbox}\vskip0.5em
-    %{\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+    % Turn off the title graphic since we already rendered it
+    \def\inserttitlegraphic{}
+    \setbeamertemplate{title page}[default][left]
+    \usebeamertemplate*{title page}
   \endgroup
-  \vfill
 }
 
 \mode<all>
