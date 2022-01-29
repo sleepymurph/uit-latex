@@ -148,14 +148,21 @@
 
 \begin{frame}{Rays Test}
     \begin{itemize}
-        \item Here are the rays by themselves, without being cut off by the background.\
-            The dot in the fourth set is the origin of the shape.\
+        \item Here are the rays by themselves, without being cut off by the background.\\
+            The scale on the 4th shape shows the origin and height parameters,\\
+            which are based on the title page.
             \medskip
 
             \tikz{\uitsplitrays{0,0}{4em}}
             \tikz{\uitsplitrays[split ray/.append style={color=UitYellow}]{0,0}{4em}}
             \tikz{\uitsplitrays[split ray/.append style={color=UitRed}]{0,0}{4em}}
-            \tikz{\uitsplitrays{0,0}{4em} \path[fill] (0,0) circle (1pt);}
+            \begin{tikzpicture}
+                \uitsplitrays{0,0}{4em}
+                \path[draw] (-2pt,0) -- (2pt,0)
+                            (0,0) -- (0,4em)
+                            (-2pt,4em) -- (2pt,4em);
+                \path[fill] (0,0) circle (1pt);
+            \end{tikzpicture}
     \end{itemize}
 \end{frame}
 
