@@ -156,6 +156,14 @@
 \newcommand{\uit@angle}{69}
 \newif\if@uit@splitrays \@uit@splitraysfalse
 
+% \uitsplitbackground: Shade a rectangle in two parts, split by the angled line
+%
+% Optional param 1: tikz keys to set
+% Param 2: south west corner of the rectangle
+% Param 3: north east corner of the rectangle
+%
+% See uitbeamertest.tex and beamerinnerthemeuit.sty for examples.
+%
 \newcommand\uitsplitbackground[3][]{
     \begin{scope}[
             split pos/.store in = \splitpos,
@@ -196,28 +204,83 @@
 %
 % [Profilelement]: https://uit.no/ansatte/grafiskprofil#innhold_617374
 
+% \uitsplitrays: Draw a cluster of decorative rays
+%
+% Optional #1: tikz keys to pass to the rays
+% #2: lower "origin" point
+% #3: "height" of the shape
+%
+% The "origin" point and the "height" are based on the rectangle of the
+% background for the presentation template (because that's how I eyeballed the
+% angle and length). The actual shape will be much larger, especially above.
+% See the rendered uitbeamertest.pdf for a visualization.
+%
+% To style all rays, append to the style of the "split ray" key.
+% To selectively turn off the rays to the left or right of the split line,
+% set the style of "split ray left" or "split ray right" to empty.
+%
+% See uitbeamertest.tex for examples.
+%
 \newcommand\uitsplitrays[3][]{
     \begin{scope}
         \tikzset{#1}
         \coordinate (anglebottom) at (#2);
         \pgfmathsetlengthmacro{\bgheight}{#3}
 
+        % Depth below the page bottom (along the angle) where the rays appear to start
         \pgfmathsetlengthmacro{\raydepth}{\bgheight * .3}
+        % Radius of the circle at the tip of each ray
         \pgfmathsetlengthmacro{\rayradius}{\bgheight * .03}
 
         \path (anglebottom) ++ (\uit@angle: -\raydepth) coordinate (ray origin);
 
-        \foreach \angle/\len in {1/2, 1.2/2.2, 1.5/2.5, 1.8/1.8, 6/.03, 5.5/2, 7.5/.60, 11/1.5, 15/.4} {
+        % Draw the rays to the left of the line
+        %
+        % These angle/length pairs were approximated by eyeballing the UiT
+        % PowerPoint template.
+        % The angle is the offset from the line.
+        % The length is the proportion of the PowerPoint template page height.
+        \foreach \angle/\len in {
+                1/2, 1.2/2.2, 1.5/2.5, 1.8/1.8,
+                6/.03, 5.5/2, 7.5/.60, 11/1.5, 15/.4
+            } {
             \uitsplitray[#1, split ray left]
                 {ray origin}{\uit@angle+\angle}{\len*\bgheight + \raydepth}{\rayradius}
         }
-        \foreach \angle/\len in {1.5/3, 3.4/1.3, 5/1.5, 6.2/1.2, 6.3/.20, 11/.5} {
+        % Draw the rays to the right of the line
+        %
+        % The right-side angle offsets are negated before calling the subroutine.
+        % It was just easier to think in positive offsets.
+        \foreach \angle/\len in {
+                1.5/3, 3.4/1.3, 5/1.5, 6.2/1.2, 6.3/.20, 11/.5
+            } {
             \uitsplitray[#1, split ray right]
                 {ray origin}{\uit@angle-\angle}{\len*\bgheight + \raydepth}{\rayradius}
         }
     \end{scope}
 }
 
+% \uitsplitray: Path a single decorative ray (not drawn by default)
+%
+% Optional param 1: tikz keys
+% Param 2: origin of the ray
+% Param 3: angle
+% Param 4: length
+% Param 5: radius of the circle at the end of the ray
+%
+% Here the origin, angle, and length are the actual direct numbers,
+% rather than the offsets of the \uitsplitrays macro.
+%
+% This macro doesn't actually fill the path by default. You need to pass a
+% style. This is so that the left or right half of the group of rays can be
+% turned off selectively.
+% The "split ray" key controls the default style, and then there are "split ray
+% left" and "split ray right" keys that simply refer back to "split ray".
+%
+% When drawing left rays, call with [split ray left], and likewise for the
+% right rays. Then callers can set "split ray right/.style = {}" to turn off
+% the right rays.
+%
 \newcommand\uitsplitray[5][]{
     \begin{scope}[
             split ray/.style = {fill, color=UitLightBlue, opacity=.2, path fading=west},
@@ -232,9 +295,12 @@
 
         \tikzset{split ray/.append style = {fading angle=\rayangle}}
 
+        % Set a circle node at the tip of the ray so we can calculate the edges
+        % of the ray as tangent lines from the origin to the edge of the circle.
         \path (ray origin) -- ++(\rayangle: \raylen)
             node[circle, minimum size=2*\rayradius, outer sep=0, inner sep=0, transform shape] (ray tip) {};
 
+        % The actual ray path, which will be drawn or not according to param #1
         \path[#1] (ray origin)
             -- (tangent cs:node=ray tip, point={(ray origin)}, solution=1)
             -- (tangent cs:node=ray tip, point={(ray origin)}, solution=2)
