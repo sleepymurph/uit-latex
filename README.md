@@ -11,7 +11,9 @@ specifically the graphic profile introduced in 2019.
 
 <https://uit.no/ansatte/grafiskprofil>
 
-[beamer package]: https://www.ctan.org/pkg/beamer
+![Example of beamer presentation with UiT title page](examples/beamer-title.png "Example of title page")
+
+See [`examples/uitbeamertest.pdf`] for an example presentation.
 
 These packages are in an extremely early stage, and were created by someone
 who is neither a graphic designer, nor an expert in LaTeX programming
@@ -23,6 +25,8 @@ but I have tried to comment the code extensively
 So see the different `.sty` files themselves,
 and see `uitbeamertest.tex` for an example of how to use them.
 
+[beamer package]: https://www.ctan.org/pkg/beamer
+[`examples/uitbeamertest.pdf`]: examples/uitbeamertest.pdf
 [DocTeX]: https://www.ctan.org/pkg/doc
 
 Quick Start: Beamer Presentation
@@ -58,6 +62,8 @@ By default the color theme colors the text of headers on a white background,
 similar to beamer's default.
 To get shaded backgrounds for headers and blocks, similar to beamer's
 `orchid` color scheme, pass the `shadeblocks` option to the color theme.
+
+![Example of UiT color theme with `shadeblocks` option](examples/beamer-colors.png "Example slide showing colored blocks")
 
 ```latex
 % Use shaded backgrounds for blocks and titles
@@ -95,15 +101,27 @@ UiT designs often place a photo under half of the split,
 especially the right half.
 The UiT inner theme uses beamer's `\titlegraphic` feature for this.
 If you set a title graphic with `\titlegraphic`, the theme will place it in a
-TikZ node anchored it to the right side of the page (`current page.east`).
+TikZ node anchored it to the right side of the page (`current page.east`),
+and it will skip drawing the background and starburst pattern on the right side.
 
 Typically this will by an `\includegraphics` command with `height=\paperheight`
 and optional trimming.
+
+![Example of UiT beamer title page with photo on the right side](examples/beamer-title-graphic.png "Example title page with photo")
 
 ```latex
 % trim's argument order is left bottom right top
 \titlegraphic{\includegraphics[height=\paperheight, trim=0 0 1cm 0]{example-art/csiro-five-antennas-bg.jpg}}
 ```
+
+Antenna photo by John Masterson, [CSIRO],
+licensed under [CC-BY-3.0],
+used unmodified except for cropping.
+More info at [the photo's WikiMedia Commons page].
+
+[CSIRO]: https://www.scienceimage.csiro.au/pages/about/
+[CC-BY-3.0]: https://creativecommons.org/licenses/by/3.0/
+[the photo's WikiMedia Commons page]: https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
 
 Note that `\includegraphics` does not enlarge images, so if your photo is too
 low a resolution, it might not stretch to the top and bottom of the page,

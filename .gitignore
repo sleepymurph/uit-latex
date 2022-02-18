@@ -6,6 +6,7 @@
 assets/
 assets-download/
 example-art/
+examples/
 
 # LaTeX temporary files
 *.aux
