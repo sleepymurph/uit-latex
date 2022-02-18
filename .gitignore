@@ -1,5 +1,6 @@
 # Output files
 *.pdf
+*.html
 
 # Assets
 assets/

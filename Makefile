@@ -1,16 +1,18 @@
 .PHONY: default clean assets2019 logos2019 example_art
 
-default: assets2019 example_art uitbeamertest.pdf
+default: assets2019 example_art uitbeamertest.pdf README.html
 
 clean:
 	git clean -fXd ./
 
-uitbeamertest.pdf: logos2019 example_art
+uitbeamertest.pdf: | logos2019 example_art
 
 %.pdf: %.tex $(wildcard *.sty)
 	pdflatex -halt-on-error $<
 	pdflatex -halt-on-error $<
 
+%.html: %.md
+	pandoc --from gfm $< -o $@
 
 # Assets
 
