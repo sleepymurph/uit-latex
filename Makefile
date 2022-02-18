@@ -1,6 +1,9 @@
-.PHONY: default assets2019 logos2019 example_art
+.PHONY: default clean assets2019 logos2019 example_art
 
 default: assets2019 example_art uitbeamertest.pdf
+
+clean:
+	git clean -fXd ./
 
 uitbeamertest.pdf: logos2019 example_art
 

@@ -2,6 +2,7 @@
 *.pdf
 
 # Assets
+assets/
 assets-download/
 example-art/
 
