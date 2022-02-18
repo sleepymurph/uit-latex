@@ -91,7 +91,7 @@ The new command `\titlesplitoptions` is provided to pass keys to the title page.
 \titlesplitoptions{split pos=.50}
 ```
 
-See uitbeamertest.tex for examples,
+See `uitbeamertest.tex` for examples,
 and see the code in the "Angle Test" and "Rays Test" frames
 for examples of using TikZ keys to change colors or add transparency.
 
@@ -104,24 +104,24 @@ If you set a title graphic with `\titlegraphic`, the theme will place it in a
 TikZ node anchored it to the right side of the page (`current page.east`),
 and it will skip drawing the background and starburst pattern on the right side.
 
-Typically this will by an `\includegraphics` command with `height=\paperheight`
+Typically this will be an `\includegraphics` command with `height=\paperheight`
 and optional trimming.
 
 ![Example of UiT beamer title page with photo on the right side](examples/beamer-title-graphic.png "Example title page with photo")
+
+Antenna photo by John Masterson, [CSIRO],
+licensed under [CC-BY-3.0],
+used unmodified except for cropping.
+More info at [the photo's Wikimedia Commons page].
+
+[CSIRO]: https://www.scienceimage.csiro.au/pages/about/
+[CC-BY-3.0]: https://creativecommons.org/licenses/by/3.0/
+[the photo's Wikimedia Commons page]: https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
 
 ```latex
 % trim's argument order is left bottom right top
 \titlegraphic{\includegraphics[height=\paperheight, trim=0 0 1cm 0]{example-art/csiro-five-antennas-bg.jpg}}
 ```
-
-Antenna photo by John Masterson, [CSIRO],
-licensed under [CC-BY-3.0],
-used unmodified except for cropping.
-More info at [the photo's WikiMedia Commons page].
-
-[CSIRO]: https://www.scienceimage.csiro.au/pages/about/
-[CC-BY-3.0]: https://creativecommons.org/licenses/by/3.0/
-[the photo's WikiMedia Commons page]: https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
 
 Note that `\includegraphics` does not enlarge images, so if your photo is too
 low a resolution, it might not stretch to the top and bottom of the page,
@@ -163,6 +163,8 @@ Files in this Repository
 
 - - - - -
 
-Git repository for UiT Styling Tools and Beamer Template for LaTeX  
+UiT Styles and Beamer Template for LaTeX  
 Copyright 2022 Michael J. Murphy  
-See LICENSE file for licensing information  
+See [LICENSE] file for licensing information  
+
+[LICENSE]: LICENSE
