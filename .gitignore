@@ -6,7 +6,9 @@
 assets/
 assets-download/
 example-art/
-examples/
+
+# Generated examples that should not be checked in for display
+examples/uitbeamertest-*.png
 
 # LaTeX temporary files
 *.aux

@@ -1,13 +1,13 @@
-.PHONY: default dist clean assets2019 logos2019 example_art examples
+.PHONY: default clean dist assets2019 example_art examples
 
 default: assets2019 example_art uitbeamertest.pdf README.html
 
-dist: default examples clean
+dist: clean default examples clean
 
 clean:
 	git clean -fXd ./
 
-uitbeamertest.pdf: | logos2019 example_art
+uitbeamertest.pdf: | assets2019 example_art
 
 %.pdf: %.tex $(wildcard *.sty)
 	pdflatex -halt-on-error $<
@@ -18,20 +18,18 @@ uitbeamertest.pdf: | logos2019 example_art
 
 # Assets
 
-logos2019: \
-    assets/UiT_Logo_Eng_Hvit.pdf
+assets2019: \
+    assets-download/profil2019/UiT_PowerPoint_engelsk.potx \
+    assets/uit-profil2019/UiT_Logo_Eng_Hvit.pdf
 
-assets2019: logos2019 \
-    assets-download/2019/UiT_PowerPoint_engelsk.potx
-
-assets-download/2019/UiT_PowerPoint_engelsk.potx:
+assets-download/profil2019/UiT_PowerPoint_engelsk.potx:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/maler/UiT_PowerPoint_engelsk.potx
 
-assets-download/2019/logo/engelsk.zip:
+assets-download/profil2019/logo/engelsk.zip:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/logo/engelsk.zip
 
-assets/UiT_Logo_Eng_Hvit.pdf: | assets-download/2019/logo/engelsk.zip
-	mkdir -p $(@D) && unzip -j -d $(@D) assets-download/2019/logo/engelsk.zip "engelsk/Logo\ for\ trykk/UiT_Logo_Eng_Hvit.pdf"
+assets/uit-profil2019/UiT_Logo_Eng_Hvit.pdf: | assets-download/profil2019/logo/engelsk.zip
+	mkdir -p $(@D) && unzip -j -d $(@D) assets-download/profil2019/logo/engelsk.zip "engelsk/Logo\ for\ trykk/UiT_Logo_Eng_Hvit.pdf"
 
 # Example art
 
@@ -62,10 +60,7 @@ examples: \
 examples/%.pdf: %.pdf
 	mkdir -p $(@D) && cp $< $@
 
-examples/uitbeamertest-0.png\
-examples/uitbeamertest-1.png\
-examples/uitbeamertest-3.png\
-: examples/uitbeamertest.pdf
+examples/uitbeamertest-%.png: examples/uitbeamertest.pdf
 	mkdir -p $(@D) && convert $< -density 300 -resize x200 $(<:.pdf=.png)
 
 examples/beamer-title.png: examples/uitbeamertest-0.png
