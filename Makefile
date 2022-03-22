@@ -18,9 +18,12 @@ uitbeamertest.pdf: | assets2019 example_art
 
 # Assets
 
-assets2019: \
+assets2019: | \
     assets-download/profil2019/UiT_PowerPoint_engelsk.potx \
-    assets/uit-profil2019/UiT_Logo_Eng_Hvit.pdf
+    assets/uit-profil2019/UiT_Logo_Eng_Hvit.pdf \
+    assets/uit-profil2019/UiT_Logo_Eng_Sort.pdf \
+    assets/uit-profil2019/UiT_Logo_Eng_Bla_CMYK.pdf \
+    assets/uit-profil2019/UiT_Logo_Eng_Bla_RGB.pdf
 
 assets-download/profil2019/UiT_PowerPoint_engelsk.potx:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/maler/UiT_PowerPoint_engelsk.potx
@@ -28,8 +31,8 @@ assets-download/profil2019/UiT_PowerPoint_engelsk.potx:
 assets-download/profil2019/logo/engelsk.zip:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/logo/engelsk.zip
 
-assets/uit-profil2019/UiT_Logo_Eng_Hvit.pdf: | assets-download/profil2019/logo/engelsk.zip
-	mkdir -p $(@D) && unzip -j -d $(@D) assets-download/profil2019/logo/engelsk.zip "engelsk/Logo\ for\ trykk/UiT_Logo_Eng_Hvit.pdf"
+assets/uit-profil2019/UiT_Logo_Eng_%.pdf: | assets-download/profil2019/logo/engelsk.zip
+	mkdir -p $(@D) && unzip -j -d $(@D) assets-download/profil2019/logo/engelsk.zip "engelsk/Logo\ for\ trykk/UiT_Logo_Eng_$*.pdf"
 
 # Example art
 
