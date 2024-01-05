@@ -36,11 +36,19 @@ First, run `make` in this repository.
 This will download the UiT logos and other assets used by the template,
 and it will build the example presentation `uitbeamertest.tex`.
 
-Then add this repository to your `TEXINPUTS` environment variable
-(see `man pdflatex` for details on setting input directories):
+The build process requires the `convert` utility from ImageMagick.
+On apt-based systems (Debian, Ubuntu, etc.) you can install ImageMagick with:
 
 ```bash
-$ export TEXINPUTS=.:..:$HOME/path/to/uit-latex
+$ sudo apt install imagemagick
+```
+
+Then add this repository to your `TEXINPUTS` environment variable
+(the extra ':' at the end causes TeX to append the normal search paths,
+see `man pdflatex` for details on setting input directories):
+
+```bash
+$ export TEXINPUTS=.:..:$HOME/path/to/uit-latex:
 ```
 
 To create a UiT beamer presentation, use the UiT color theme, the UiT inner
