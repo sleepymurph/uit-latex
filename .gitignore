@@ -7,7 +7,8 @@ assets/
 assets-download/
 example-art/
 
-# Generated examples that should not be checked in for display
+# Generated screenshots of PDF pages by page number.
+# Ignore these and only check in the ones that are given more-specific names.
 examples/uitbeamertest-*.png
 
 # LaTeX temporary files
