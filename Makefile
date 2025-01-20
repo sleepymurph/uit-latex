@@ -36,7 +36,11 @@ assets-download/profil2019/logo/engelsk.zip:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/logo/engelsk.zip
 
 assets/uit-profil2019/UiT_Logo_Eng_%.pdf: | assets-download/profil2019/logo/engelsk.zip
-	mkdir -p $(@D) && unzip -j -d $(@D) assets-download/profil2019/logo/engelsk.zip "engelsk/Logo\ for\ trykk/UiT_Logo_Eng_$*.pdf"
+	mkdir -p $(@D) \
+		&& unzip -j -d $(@D) \
+			assets-download/profil2019/logo/engelsk.zip \
+			"engelsk/Logo\ for\ trykk/UiT_Logo_Eng_$*.pdf" \
+		&& chmod a-x $@
 
 # Downloading Example Art to Include in Test PDFs
 # ======================================================================
