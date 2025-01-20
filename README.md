@@ -13,9 +13,12 @@ specifically the graphic profile introduced in 2019.
 
 ![Example of beamer presentation with UiT title page](examples/beamer-title.png "Example of title page")
 
-See [`examples/uitbeamertest.pdf`] for an example presentation.
+Sample PDFs:
 
-These packages are in an extremely early stage, and were created by someone
+* Presentation: [examples/uitbeamertest.pdf](examples/uitbeamertest.pdf)
+* Article:      [examples/uitbeamerarticletest.pdf](examples/uitbeamerarticletest.pdf)
+
+These packages are in an early stage, and were created by someone
 who is neither a graphic designer, nor an expert in LaTeX programming
 (though he is improving).
 
@@ -26,7 +29,6 @@ So see the different `.sty` files themselves,
 and see `uitbeamertest.tex` for an example of how to use them.
 
 [beamer package]: https://www.ctan.org/pkg/beamer
-[`examples/uitbeamertest.pdf`]: examples/uitbeamertest.pdf
 [DocTeX]: https://www.ctan.org/pkg/doc
 
 Quick Start: Beamer Presentation
@@ -168,6 +170,13 @@ Files in this Repository
 - **`uitbeamertest.tex`**
     --- An example UiT beamer presentation
         and a showcase / example for the various UiT style colors and commands
+
+- **`uitbeamerarticletest.tex`**
+    --- An example UiT beamer presentation rendered in article mode
+        with `beamerarticle`
+
+- **`uitbeamercontent.tex`**
+    --- Content shared between presentation and article
 
 - - - - -
 

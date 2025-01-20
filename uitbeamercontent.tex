@@ -1,0 +1,159 @@
+\begin{frame}[plain]
+    \subtitle{Default title page}
+    \titlepage
+\end{frame}
+
+\begin{frame}[plain]
+    \subtitle{Title page with graphic (photo by CSIRO)}
+    \titlegraphic{\includegraphics[height=\paperheight, trim=0 0 1cm 0]{example-art/csiro-five-antennas-bg.jpg}}
+    \titlesplitoptions{split pos=.50}
+    \titlepage
+    \label{title-pic}
+\end{frame}
+
+\begin{frame}{Antenna Photo Information}
+    \centering
+    \includegraphics[height=.25\paperheight]{example-art/csiro-five-antennas-bg.jpg}
+
+    The antenna image used throughout this presentation is by
+    John Masterson,
+    \href{https://www.scienceimage.csiro.au/pages/about/}{CSIRO},
+    licensed under \href{https://creativecommons.org/licenses/by/3.0/}{CC-BY-3.0}.
+    It is used unmodified except for cropping or adding a color overlay.
+    More info about the photo at \href{https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg}{Wikimedia Commons}.
+\end{frame}
+
+\section{Color Tests}
+
+\subsection{Basic Colors}
+
+\begin{frame}{Color Test: Base UiT Palette}
+    \scriptsize
+    \uitcolortest
+
+    \medskip
+
+    \uitcolortest[rgb,hsb,gray]
+\end{frame}
+
+\subsection{Beamer Colors}
+\label{beamercolortest}
+
+\begin{frame}{Color Test: Beamer Colors}
+    \begin{columns}
+        \begin{column}{0.65\textwidth}
+            \scriptsize
+            \uitcolortestbeamerpalette
+            \smallskip
+        \end{column}
+        \begin{column}{0.25\textwidth}
+            \begin{block}{Test Block}
+                Test block
+            \end{block}
+            \begin{alertblock}{Alert Block}
+                Alert block
+            \end{alertblock}
+            \begin{exampleblock}{Example Block}
+                Example block
+            \end{exampleblock}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Color Test: Hyperlinks}
+
+    \begingroup
+        \scriptsize
+        \begin{testcolors}[cmyk,RGB,HTML]
+            \testcolor{uitlinkcolor}
+            \testcolor{uiturlcolor}
+        \end{testcolors}
+    \endgroup
+
+    \medskip
+
+    \begin{itemize}
+        \item Example internal ref to \hyperref[beamercolortest]{Beamer Color Test}
+        \item Example URL \url{https://www.ctan.org/pkg/beamer}
+        \item Example citation \cite{aa}
+        \item Example file ref \url{uit.sty}
+    \end{itemize}
+
+    \medskip
+
+    \begin{block}{The Bibliography Block}
+        \begin{thebibliography}{1}
+            \bibitem{aa} Jane Doe. "An example bibliography entry."
+                \url{https://www.ctan.org/pkg/beamer}
+        \end{thebibliography}
+    \end{block}
+\end{frame}
+
+\begin{frame}{Angle Test}
+    \begin{itemize}
+        \item The split can be drawn with different parameters
+
+            \tikz{\uitsplitbackground{0,0}{4em, 3em}}
+            \tikz{\uitsplitbackground[
+                    split pos = .25,
+                    split right/.append style = {color=UitRed, opacity=.4},
+                ]{0,0}{4em, 3em}}
+            \tikz{\uitsplitbackground[
+                    opacity=.6,
+                    line width = 1em,
+                ]{0,0}{4em, 3em}}
+            \tikz{\uitsplitbackground[split rays=true]{0,0}{4em, 3em}}
+
+        \item The split can be placed with transparency, like in
+            \href{https://uit.no/ansatte/grafiskprofil\#innhold_631815}{UiT's examples}
+
+            \begin{tikzpicture}
+                \node[inner sep=0, outer sep=0] (bg)
+                    {\includegraphics[height=5em]{example-art/csiro-five-antennas-bg.jpg}};
+                \uitsplitbackground[
+                    split pos = .55,
+                    split left/.style = {},
+                    split right/.append style = {color=UitRed, opacity=.4},
+                    ]{bg.south west}{bg.north east}
+            \end{tikzpicture}
+            \begin{tikzpicture}
+                \node[inner sep=0, outer sep=0] (bg)
+                    {\includegraphics[height=5em]{example-art/csiro-five-antennas-bg.jpg}};
+                \uitsplitbackground[
+                    split pos = .75,
+                    split left/.style = {},
+                    split right/.append style = {color=UitYellow, opacity=.4},
+                    ]{bg.south west}{bg.north east}
+            \end{tikzpicture}
+            \begin{tikzpicture}
+                \node[inner sep=0, outer sep=0] (bg)
+                    {\includegraphics[height=5em]{example-art/csiro-five-antennas-bg.jpg}};
+                \uitsplitbackground[
+                    split pos=.33,
+                    split rays=true,
+                    split right/.style = {},
+                    split ray right/.style = {},
+                    ]{bg.south west}{bg.north east}
+            \end{tikzpicture}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Rays Test}
+    \begin{itemize}
+        \item Here are the rays by themselves, without being cut off by the background.\\
+            The scale on the 4th shape shows the origin and height parameters,\\
+            which are based on the title page.
+            \medskip
+
+            \tikz{\uitsplitrays{0,0}{4em}}
+            \tikz{\uitsplitrays[split ray/.append style={color=UitYellow}]{0,0}{4em}}
+            \tikz{\uitsplitrays[split ray/.append style={color=UitRed}]{0,0}{4em}}
+            \begin{tikzpicture}
+                \uitsplitrays{0,0}{4em}
+                \path[draw] (-2pt,0) -- (2pt,0)
+                            (0,0) -- (0,4em)
+                            (-2pt,4em) -- (2pt,4em);
+                \path[fill] (0,0) circle (1pt);
+            \end{tikzpicture}
+    \end{itemize}
+\end{frame}

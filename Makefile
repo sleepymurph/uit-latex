@@ -66,12 +66,14 @@ example-art/csiro-five-antennas.jpg:
 
 dev_preview: \
 	uitbeamertest.pdf \
+	uitbeamerarticletest.pdf \
 	README.html
 
 LATEXENGINE := pdflatex
 LATEXFLAGS += -halt-on-error
 
-uitbeamertest.pdf: | assets2019 example_art
+uitbeamertest.pdf: uitbeamercontent.tex | assets2019 example_art
+uitbeamerarticletest.pdf: uitbeamercontent.tex | assets2019 example_art
 
 %.pdf: %.tex $(wildcard *.sty)
 	$(LATEXENGINE) $(LATEXFLAGS) $<
@@ -85,6 +87,7 @@ uitbeamertest.pdf: | assets2019 example_art
 
 examples: \
     examples/uitbeamertest.pdf \
+    examples/uitbeamerarticletest.pdf \
     examples/beamer-title.png \
     examples/beamer-title-graphic.png \
     examples/beamer-colors.png

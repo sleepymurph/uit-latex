@@ -1,0 +1,33 @@
+\documentclass[]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[default]{opensans}
+\usepackage{uit}
+\usepackage{beamerarticle}
+\usepackage{hyperref}
+
+\newcommand\titlesplitoptions[1]{}
+\setjobnamebeamerversion{uitbeamertest}
+
+\useoutertheme{infolines}
+\uitlinkcolors
+
+\title{Test UiT Beamer Article}
+\subtitle{With a Subtitle}
+\author[Mike Murphy]{Michael J. Murphy}
+\institute[UiT]{UiT The Arctic Universtity of Norway}
+\hypersetup{pdfusetitle}
+
+\begin{document}
+
+\maketitle
+
+\begin{center}
+    \includeslide[width=\textwidth]{title-pic}
+\end{center}
+
+\tableofcontents
+
+\input{uitbeamercontent.tex}
+\end{document}
