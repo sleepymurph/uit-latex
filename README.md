@@ -140,6 +140,20 @@ leaving you with awkward whitespace
 
 [graphicx package]: https://www.ctan.org/pkg/graphicx
 
+### Add Decorative Rays to Background in Normal Slides
+
+It is possible to add decorative rays to normal slides.
+However, this option is disabled by default because it adds noticeable size and
+rendering time to the PDFs. To enable it, pass the `bgelement` option to the
+inner theme.
+
+![Example of UiT beamer slide page with decorative element](examples/beamer-slide-with-element.png "Example slide with rays")
+
+```latex
+% Enable decorative element on background of normal frames
+\useinnertheme[bgelement]{uit}
+```
+
 Files in this Repository
 --------------------------------------------------
 

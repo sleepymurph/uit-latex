@@ -2,6 +2,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
+% Remove non-deterministic metadata, for reproducible PDF builds
+\usepackage[nopdftrailerid=true]{pdfprivacy}
+
 \usepackage[default]{opensans}
 
 %\selectcolormodel{cmyk}
@@ -9,7 +12,7 @@
 
 %\usecolortheme{uit}
 \usecolortheme[shadeblocks]{uit}
-\useinnertheme{uit}
+\useinnertheme[bgelement]{uit}
 
 \useoutertheme{infolines}
 \hypersetup{colorlinks}

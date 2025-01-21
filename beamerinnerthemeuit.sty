@@ -1,3 +1,9 @@
+\newif\if@uit@bgelement
+\@uit@bgelementfalse   % default: No background element
+\DeclareOptionBeamer{bgelement}{\@uit@bgelementtrue}
+\DeclareOptionBeamer{nobgelement}{\@uit@bgelementfalse}
+
+\ProcessOptionsBeamer\relax
 
 \RequirePackage{uit}
 
@@ -16,6 +22,7 @@
 \setbeamercolor*{date}      {parent=title}
 \setbeamercolor*{institute} {parent=title}
 
+% Title Page with blue background, split with rays, and optional image
 \defbeamertemplate*{title page}{uit}[1][]
 {
   % Draw background
@@ -58,6 +65,31 @@
     \usebeamertemplate*{title page}
   \endgroup
 }
+
+\if@uit@bgelement
+
+  \addtobeamertemplate{background}
+  {
+    \begin{tikzpicture}
+      % Reuse the split background from the title page,
+      % but remove the background fill and reduce the opacity.
+      \uitsplitbackground
+        [
+          % Turn off background fill and split line
+          split left/.style   = { fill=none },
+          split right/.style  = { fill=none },
+          split line/.style   = { draw=none },
+          % Turn on and position rays
+          split rays  = true,
+          split pos   = .90,
+          split ray/.append style = { opacity=0.08 },
+        ]
+        {current page.south west}
+        {current page.north east}
+    \end{tikzpicture}
+  }
+
+\fi
 
 \mode<all>
 % vim: set sw=2 :

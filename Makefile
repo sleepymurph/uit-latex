@@ -80,7 +80,7 @@ uitbeamerarticletest.pdf: uitbeamercontent.tex | assets2019 example_art
 	$(LATEXENGINE) $(LATEXFLAGS) $<
 
 %.html: %.md
-	pandoc --from gfm $< -o $@
+	pandoc -s --from gfm $< -o $@
 
 # Rendered Examples to be Distributed with Code
 # ======================================================================
@@ -90,7 +90,8 @@ examples: \
     examples/uitbeamerarticletest.pdf \
     examples/beamer-title.png \
     examples/beamer-title-graphic.png \
-    examples/beamer-colors.png
+    examples/beamer-colors.png \
+    examples/beamer-slide-with-element.png
 
 # Example PDF: copy development PDF
 examples/%.pdf: %.pdf
@@ -114,4 +115,7 @@ examples/beamer-title-graphic.png: examples/uitbeamertest-1.png
 	cp $< $@
 
 examples/beamer-colors.png: examples/uitbeamertest-4.png
+	cp $< $@
+
+examples/beamer-slide-with-element.png: examples/uitbeamertest-6.png
 	cp $< $@
