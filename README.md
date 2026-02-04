@@ -9,7 +9,7 @@ It follows the guidelines specified (in Norwegian) on
 UiT's Grafisk profil (Graphic Profile) page,
 specifically the graphic profile introduced in 2019.
 
-<https://uit.no/ansatte/grafiskprofil>
+<https://uit.no/ansatte/kommunikasjonstips/grafisk>
 
 ![Example of UiT beamer title page with photo on the right side](examples/beamer-title-graphic.png "Example title page with photo")
 
