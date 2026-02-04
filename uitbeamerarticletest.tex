@@ -1,36 +1,20 @@
+% Beamer article
 \documentclass[]{article}
+\usepackage{beamerarticle}
+
+% Font encoding
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 
-% Remove non-deterministic metadata, for reproducible PDF builds
-\usepackage[nopdftrailerid=true]{pdfprivacy}
-
-\usepackage[default]{opensans}
-\usepackage{uit}
-\usepackage{beamerarticle}
-\usepackage{hyperref}
+% UiT Beamer / theme setup
+%   Note that Beamer color, inner, and outer themes
+%   are ignored in article mode.
+\usepackage[default]{opensans}      % UiT font (Open Sans)
+\usepackage{uit}                    % UiT package general
+\usecolortheme[shadeblocks]{uit}    % UiT colors
+\useinnertheme[bgelement]{uit}      % UiT inner theme (title page)
+\useoutertheme{infolines}           % Useful outer theme
 
 \newcommand\titlesplitoptions[1]{}
-\setjobnamebeamerversion{uitbeamertest}
-
-\useoutertheme{infolines}
-\uitlinkcolors
-
-\title{Test UiT Beamer Article}
-\subtitle{With a Subtitle}
-\author[Mike Murphy]{Michael J. Murphy}
-\institute[UiT]{UiT The Arctic Universtity of Norway}
-\hypersetup{pdfusetitle}
-
-\begin{document}
-
-\maketitle
-
-\begin{center}
-    \includeslide[width=\textwidth]{title-pic}
-\end{center}
-
-\tableofcontents
 
 \input{uitbeamercontent.tex}
-\end{document}

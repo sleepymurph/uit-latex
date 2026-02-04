@@ -73,7 +73,8 @@ LATEXENGINE := pdflatex
 LATEXFLAGS += -halt-on-error
 
 uitbeamertest.pdf: uitbeamercontent.tex | assets2019 example_art
-uitbeamerarticletest.pdf: uitbeamercontent.tex | assets2019 example_art
+uitbeamerarticletest.pdf: uitbeamercontent.tex uitbeamertest.pdf \
+	| assets2019 example_art
 
 %.pdf: %.tex $(wildcard *.sty)
 	$(LATEXENGINE) $(LATEXFLAGS) $<
