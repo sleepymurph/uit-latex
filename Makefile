@@ -64,17 +64,21 @@ example-art/csiro-five-antennas.jpg:
 # Test Documents
 # ======================================================================
 
-dev_preview: \
+test_pdfs := \
 	uitbeamertest.pdf \
+	uitbeamertest-shadeblocks.pdf \
+	uitbeamertest-coatedpaper.pdf \
 	uitbeamerarticletest.pdf \
-	README.html
+
+dev_preview: $(test_pdfs) README.html
 
 LATEXENGINE := pdflatex
 LATEXFLAGS += -halt-on-error
 
-uitbeamertest.pdf: uitbeamercontent.tex | assets2019 example_art
-uitbeamerarticletest.pdf: uitbeamercontent.tex uitbeamertest.pdf \
-	| assets2019 example_art
+$(test_pdfs): uitbeamercontent.tex | assets2019 example_art
+
+# The article extracts frames from the presentation PDF.
+uitbeamerarticletest.pdf: uitbeamertest.pdf
 
 %.pdf: %.tex $(wildcard *.sty)
 	$(LATEXENGINE) $(LATEXFLAGS) $<
@@ -85,19 +89,6 @@ uitbeamerarticletest.pdf: uitbeamercontent.tex uitbeamertest.pdf \
 
 # Rendered Examples to be Distributed with Code
 # ======================================================================
-
-examples: \
-    examples/uitbeamertest.pdf \
-    examples/uitbeamerarticletest.pdf \
-    examples/beamer-title.png \
-    examples/beamer-title-graphic.png \
-    examples/beamer-colors.png \
-    examples/beamer-slide-with-element.png
-
-# Example PDF: copy development PDF
-examples/%.pdf: %.pdf
-	mkdir -p $(@D) && cp $< $@
-
 # Screenshots: Capture a given page of a PDF as a PNG
 #
 # Note that this use of 'convert' is not allowed by default on many Linux
@@ -106,17 +97,30 @@ examples/%.pdf: %.pdf
 # vulerabilities.
 #
 # See: https://askubuntu.com/a/1081907/652922
-examples/uitbeamertest-%.png: examples/uitbeamertest.pdf
-	mkdir -p $(@D) && convert $< -density 300 -resize x200 $(<:.pdf=.png)
 
-examples/beamer-title.png: examples/uitbeamertest-0.png
-	cp $< $@
+example_pngs := \
+    examples/uitbeamertest.pdf \
+    examples/uitbeamerarticletest.pdf \
+    examples/beamer-title.png \
+    examples/beamer-title-graphic.png \
+    examples/beamer-colors.png \
+    examples/beamer-colors-shadeblocks.png \
+    examples/beamer-slide-with-element.png
 
-examples/beamer-title-graphic.png: examples/uitbeamertest-1.png
-	cp $< $@
+examples: $(example_pngs)
 
-examples/beamer-colors.png: examples/uitbeamertest-4.png
-	cp $< $@
+convertflags = -density 300 -resize x200
 
-examples/beamer-slide-with-element.png: examples/uitbeamertest-6.png
-	cp $< $@
+$(example_pngs): $(test_pdfs)
+	mkdir -p $(@D)
+	cp $(test_pdfs) $(@D)
+	convert $(convertflags) uitbeamertest.pdf examples/uitbeamertest.png
+	convert $(convertflags) uitbeamertest-shadeblocks.pdf \
+		examples/uitbeamertest-shadeblocks.png
+	cp examples/uitbeamertest-0.png examples/beamer-title.png
+	cp examples/uitbeamertest-1.png examples/beamer-title-graphic.png
+	cp examples/uitbeamertest-4.png examples/beamer-colors.png
+	cp examples/uitbeamertest-shadeblocks-4.png \
+		examples/beamer-colors-shadeblocks.png
+	cp examples/uitbeamertest-shadeblocks-6.png \
+		examples/beamer-slide-with-element.png

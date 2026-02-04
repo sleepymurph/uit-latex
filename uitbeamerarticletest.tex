@@ -2,17 +2,18 @@
 \documentclass[]{article}
 \usepackage{beamerarticle}
 
-% Font encoding
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\title{Test UiT Beamer Presentation}
+\subtitle{Beamer Article Test}
+\author[Mike Murphy]{Michael J. Murphy}
+\institute[UiT]{UiT The Arctic Universtity of Norway}
 
 % UiT Beamer / theme setup
 %   Note that Beamer color, inner, and outer themes
 %   are ignored in article mode.
 \usepackage[default]{opensans}      % UiT font (Open Sans)
 \usepackage{uit}                    % UiT package general
-\usecolortheme[shadeblocks]{uit}    % UiT colors
-\useinnertheme[bgelement]{uit}      % UiT inner theme (title page)
+\usecolortheme{uit}                 % UiT colors
+\useinnertheme{uit}                 % UiT inner theme (title page)
 \useoutertheme{infolines}           % Useful outer theme
 
 \input{uitbeamercontent.tex}

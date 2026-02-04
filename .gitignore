@@ -2,14 +2,16 @@
 *.pdf
 *.html
 
-# Assets
+# Downloaded Assets
 assets/
 assets-download/
 example-art/
 
-# Generated screenshots of PDF pages by page number.
-# Ignore these and only check in the ones that are given more-specific names.
-examples/uitbeamertest-*.png
+# Intermediate PDF -> PNG conversions
+examples/*-[0-9].png
+
+# Keep example PDFs
+!examples/*.pdf
 
 # LaTeX temporary files
 *.aux

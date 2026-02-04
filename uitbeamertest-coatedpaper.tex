@@ -1,0 +1,20 @@
+% Beamer presentation
+\documentclass[aspectratio=169]{beamer}
+
+\title{Test UiT Beamer Presentation}
+\subtitle{Beamer Theme with CMYK color for glossy paper}
+\author[Mike Murphy]{Michael J. Murphy}
+\institute[UiT]{UiT The Arctic Universtity of Norway}
+
+\selectcolormodel{cmyk}
+
+% UiT Beamer / theme setup
+%   Note that Beamer color, inner, and outer themes
+%   are ignored in article mode.
+\usepackage[default]{opensans}      % UiT font (Open Sans)
+\usepackage[coatedpaper]{uit}       % UiT package general
+\usecolortheme[shadeblocks]{uit}    % UiT colors
+\useinnertheme[bgelement]{uit}      % UiT inner theme (title page)
+\useoutertheme{infolines}           % Useful outer theme
+
+\input{uitbeamercontent.tex}

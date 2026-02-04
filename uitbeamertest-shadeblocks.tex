@@ -1,0 +1,18 @@
+% Beamer presentation
+\documentclass[aspectratio=169]{beamer}
+
+\title{Test UiT Beamer Presentation}
+\subtitle{Beamer Styles with "shadeblocks" and "bgelement"}
+\author[Mike Murphy]{Michael J. Murphy}
+\institute[UiT]{UiT The Arctic Universtity of Norway}
+
+% UiT Beamer / theme setup
+%   Note that Beamer color, inner, and outer themes
+%   are ignored in article mode.
+\usepackage[default]{opensans}      % UiT font (Open Sans)
+\usepackage{uit}                    % UiT package general
+\usecolortheme[shadeblocks]{uit}    % UiT colors
+\useinnertheme[bgelement]{uit}      % UiT inner theme (title page)
+\useoutertheme{infolines}           % Useful outer theme
+
+\input{uitbeamercontent.tex}

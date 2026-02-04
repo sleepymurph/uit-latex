@@ -15,8 +15,12 @@ specifically the graphic profile introduced in 2019.
 
 Sample PDFs:
 
-* Presentation: [examples/uitbeamertest.pdf](examples/uitbeamertest.pdf)
-* Article:      [examples/uitbeamerarticletest.pdf](examples/uitbeamerarticletest.pdf)
+* Presentation: [uitbeamertest.pdf](examples/uitbeamertest.pdf)
+* Presentation with optional shading:
+    [uitbeamertest-shadeblocks.pdf](examples/uitbeamertest-shadeblocks.pdf)
+* Presentation with CMYK for glossy paper:
+    [uitbeamertest-coatedpaper.pdf](examples/uitbeamertest-coatedpaper.pdf)
+* Article:      [uitbeamerarticletest.pdf](examples/uitbeamerarticletest.pdf)
 
 These packages are in an early stage, and were created by someone
 who is neither a graphic designer, nor an expert in LaTeX programming
@@ -73,7 +77,9 @@ similar to beamer's default.
 To get shaded backgrounds for headers and blocks, similar to beamer's
 `orchid` color scheme, pass the `shadeblocks` option to the color theme.
 
-![Example of UiT color theme with `shadeblocks` option](examples/beamer-colors.png "Example slide showing colored blocks")
+![Example of UiT color theme](examples/beamer-colors.png "Example slide showing default colors")
+
+![Example of UiT color theme with `shadeblocks` option](examples/beamer-colors-shadeblocks.png "Example slide showing colored blocks")
 
 ```latex
 % Use shaded backgrounds for blocks and titles
