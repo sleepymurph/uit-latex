@@ -98,6 +98,10 @@ uitbeamerarticletest.pdf: uitbeamertest.pdf
 #
 # See: https://askubuntu.com/a/1081907/652922
 
+example_pdfs = $(addprefix examples/,$(test_pdfs))
+examples/%.pdf: %.pdf
+	mkdir -p $(@D) && cp $< $@
+
 example_pngs := \
     examples/uitbeamertest.pdf \
     examples/uitbeamerarticletest.pdf \
@@ -107,13 +111,10 @@ example_pngs := \
     examples/beamer-colors-shadeblocks.png \
     examples/beamer-slide-with-element.png
 
-examples: $(example_pngs)
+convertflags = -density 300 -resize x300 -strip
 
-convertflags = -density 300 -resize x200
-
-$(example_pngs): $(test_pdfs)
+$(example_pngs): uitbeamertest.pdf uitbeamertest-shadeblocks.pdf
 	mkdir -p $(@D)
-	cp $(test_pdfs) $(@D)
 	convert $(convertflags) uitbeamertest.pdf examples/uitbeamertest.png
 	convert $(convertflags) uitbeamertest-shadeblocks.pdf \
 		examples/uitbeamertest-shadeblocks.png
@@ -124,3 +125,5 @@ $(example_pngs): $(test_pdfs)
 		examples/beamer-colors-shadeblocks.png
 	cp examples/uitbeamertest-shadeblocks-6.png \
 		examples/beamer-slide-with-element.png
+
+examples: $(example_pdfs) $(example_pngs)
