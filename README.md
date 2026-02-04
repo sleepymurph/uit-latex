@@ -133,8 +133,10 @@ More info at [the photo's Wikimedia Commons page].
 [the photo's Wikimedia Commons page]: https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
 
 ```latex
-% trim's argument order is left bottom right top
-\titlegraphic{\includegraphics[height=\paperheight, trim=0 0 1cm 0]{example-art/csiro-five-antennas-bg.jpg}}
+\titlegraphic{\includegraphics
+        [height=\paperheight, trim=0 0 1cm 0]
+        {example-art/csiro-five-antennas-bg.jpg}}
+        % (The trim key's arguments are left bottom right top)
 ```
 
 Note that `\includegraphics` does not enlarge images, so if your photo is too
