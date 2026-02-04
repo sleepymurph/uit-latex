@@ -2,17 +2,18 @@
 \@uit@bgelementfalse   % default: No background element
 \DeclareOptionBeamer{bgelement}{\@uit@bgelementtrue}
 \DeclareOptionBeamer{nobgelement}{\@uit@bgelementfalse}
+\DeclareOptionBeamer{splitpos}[0.66]{
+  \typeout{Got splitpos option, splitpos=#1}
+  \tikzset{split pos = #1}
+}
 
 \ProcessOptionsBeamer\relax
 
 \RequirePackage{uit}
 
-\mode<all>
-{
-  % User command: \titlesplitoptions. Give tikz keys to pass to the title split.
-  \newcommand\titlesplitoptions[1]{\tikzset{title split/.style = {#1}}}
-  \titlesplitoptions{}
-}
+% User command: \titlesplitoptions. Give tikz keys to pass to the title split.
+\providecommand\titlesplitoptions[1]{\tikzset{#1}}
+\titlesplitoptions{}
 
 \mode<presentation>
 
@@ -31,7 +32,7 @@
     % If \titlegraphic was not set, draw the default background
     \ifx\inserttitlegraphic\empty
       \uitsplitbackground
-        [split rays=true, title split]
+        [split rays=true]
         {current page.south west}
         {current page.north east}
 
@@ -46,7 +47,7 @@
         split right/.style={}, split ray right/.style={},
       }}
       \uitsplitbackground
-        [split rays=true, clear split right, title split]
+        [split rays=true, clear split right]
         {current page.south west}
         {current page.north east}
     \fi

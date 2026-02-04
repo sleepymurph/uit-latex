@@ -89,16 +89,20 @@ decorative element (profilelement), and UiT logo.
 (Don't forget to run `make` to download the logo.)
 
 Different aspects of the angled split in the title page (skråelement)
-can be controlled through PGF/TikZ style keys.
-The most important is probably `split pos`, which controls the horizontal
+can be controlled through PGF/TikZ keys.
+The most important key is `split pos`, which controls the horizontal
 position of the split as a proportion of the width of the page.
-The default is `.66`, meaning the split will shoot up and to the right starting
+The default is `0.66`: the split will shoot up and to the right starting
 at a point 2/3rds of the way along the bottom edge of the page.
-The new command `\titlesplitoptions` is provided to pass keys to the title page.
 
 ```latex
-% split the title page at 50% (along the bottom) rather than 66%
-\titlesplitoptions{split pos=.50}
+% Set the position of the angled split (skråelement),
+% measured along bottom edge from left to right.
+%   0.00 = Split comes up from bottom left corner
+%   0.50 = Split comes up from center of bottom edge
+%   0.66 = Split comes up from 2/3rds of the way across (DEFAULT)
+%   1.00 = Split comes up from bottom right and runs off the page
+\tikzset{split pos=.50}
 ```
 
 See `uitbeamertest.tex` for examples,

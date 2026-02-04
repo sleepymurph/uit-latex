@@ -1,6 +1,6 @@
 
 \title{Test UiT Beamer Presentation}
-\subtitle{With a Subtitle}
+\subtitle{Using the UiT Beamer Themes}
 \author[Mike Murphy]{Michael J. Murphy}
 \institute[UiT]{UiT The Arctic Universtity of Norway}
 
@@ -32,15 +32,15 @@
     \tableofcontents
 }
 
+% Basic title frame
 \begin{frame}[plain]
-    \subtitle{Default title page}
     \titlepage
 \end{frame}
 
+% Title frame with graphic
 \begin{frame}[plain]
-    \subtitle{Title page with graphic (photo by CSIRO)}
     \titlegraphic{\includegraphics[height=\paperheight, trim=0 0 1cm 0]{example-art/csiro-five-antennas-bg.jpg}}
-    \titlesplitoptions{split pos=.50}
+    \tikzset{split pos = .50}
     \titlepage
     \label{title-pic}
 \end{frame}

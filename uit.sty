@@ -166,10 +166,9 @@
 %
 % See uitbeamertest.tex and beamerinnerthemeuit.sty for examples.
 %
+\tikzset{split pos/.initial = 0.66}
 \newcommand\uitsplitbackground[3][]{
     \begin{scope}[
-            split pos/.store in = \splitpos,
-            split pos           = .66,
             split left/.style   = { fill, color=UitDarkBlue!75!UitMedBlue },
             split right/.style  = { fill, color=UitDarkBlue },
             split line/.style   = { draw, color=white, line cap=rect, line width=.05em },
@@ -189,6 +188,7 @@
         \coordinate (south east) at (south west -| north east);
         \coordinate (north west) at (south west |- north east);
 
+        \tikzset{split pos/.get = \splitpos}
         \path ($(south west)!\splitpos!(south east)$)   coordinate (anglebottom);
         \path (anglebottom) ++ (\uit@angle: 1.5*\bgheight) coordinate (angletop);
 
