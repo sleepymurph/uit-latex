@@ -4,8 +4,7 @@
 
 # Downloaded Assets
 assets/
-assets-download/
-example-art/
+download/
 
 # Intermediate PDF -> PNG conversions
 examples/*-[0-9].png

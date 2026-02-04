@@ -2,7 +2,7 @@
 # ======================================================================
 
 # Common targets
-.PHONY: default all clean dist
+.PHONY: default all clean distclean
 
 # Development
 .PHONY: assets2019		# Download UiT assets
@@ -12,33 +12,35 @@
 # Distribution
 .PHONY: examples		# Update PDFs and screenshots in examples/ dir
 
-default: dev_preview
+default: dev_preview examples
 all: assets2019 dev_preview examples
-dist: clean examples clean
 
 clean:
+	$(RM) *.aux *.log *.nav *.out *.snm *.toc	# LaTeX files
+
+distclean:
 	git clean -fXd ./
 
 # Download UiT Template Assets
 # ======================================================================
 
 assets2019: | \
-    assets-download/profil2019/UiT_PowerPoint_engelsk.potx \
+    download/profil2019/UiT_PowerPoint_engelsk.potx \
     assets/uit-profil2019/UiT_Logo_Eng_Hvit.pdf \
     assets/uit-profil2019/UiT_Logo_Eng_Sort.pdf \
     assets/uit-profil2019/UiT_Logo_Eng_Bla_CMYK.pdf \
     assets/uit-profil2019/UiT_Logo_Eng_Bla_RGB.pdf
 
-assets-download/profil2019/UiT_PowerPoint_engelsk.potx:
+download/profil2019/UiT_PowerPoint_engelsk.potx:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/maler/UiT_PowerPoint_engelsk.potx
 
-assets-download/profil2019/logo/engelsk.zip:
+download/profil2019/logo/engelsk.zip:
 	mkdir -p $(@D) && cd $(@D) && wget https://uit.no/ressurs/uit/profil2019/logo/engelsk.zip
 
-assets/uit-profil2019/UiT_Logo_Eng_%.pdf: | assets-download/profil2019/logo/engelsk.zip
+assets/uit-profil2019/UiT_Logo_Eng_%.pdf: | download/profil2019/logo/engelsk.zip
 	mkdir -p $(@D) \
 		&& unzip -j -d $(@D) \
-			assets-download/profil2019/logo/engelsk.zip \
+			download/profil2019/logo/engelsk.zip \
 			"engelsk/Logo\ for\ trykk/UiT_Logo_Eng_$*.pdf" \
 		&& chmod a-x $@
 
@@ -46,8 +48,8 @@ assets/uit-profil2019/UiT_Logo_Eng_%.pdf: | assets-download/profil2019/logo/enge
 # ======================================================================
 
 example_art: \
-    example-art/csiro-five-antennas.jpg \
-    example-art/csiro-five-antennas-bg.jpg
+    download/csiro-five-antennas.jpg \
+    download/csiro-five-antennas-bg.jpg
 
 # Photo of antenna array
 # Image by John Masterson, CSIRO
@@ -55,7 +57,7 @@ example_art: \
 # https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
 # https://www.scienceimage.csiro.au/pages/about/
 # https://creativecommons.org/licenses/by/3.0/
-example-art/csiro-five-antennas.jpg:
+download/csiro-five-antennas.jpg:
 	mkdir -p $(@D) && cd $(@D) && wget -O $(@F) https://upload.wikimedia.org/wikipedia/commons/e/e8/CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
 
 %-bg.jpg: %.jpg
@@ -70,7 +72,7 @@ test_pdfs := \
 	uitbeamertest-coatedpaper.pdf \
 	uitbeamerarticletest.pdf \
 
-dev_preview: $(test_pdfs) README.html
+dev_preview: $(test_pdfs) README.html examples
 
 LATEXENGINE := pdflatex
 LATEXFLAGS += -halt-on-error
@@ -103,8 +105,6 @@ examples/%.pdf: %.pdf
 	mkdir -p $(@D) && cp $< $@
 
 example_pngs := \
-    examples/uitbeamertest.pdf \
-    examples/uitbeamerarticletest.pdf \
     examples/beamer-title.png \
     examples/beamer-title-graphic.png \
     examples/beamer-colors.png \
@@ -123,7 +123,7 @@ $(example_pngs): uitbeamertest.pdf uitbeamertest-shadeblocks.pdf
 	cp examples/uitbeamertest-4.png examples/beamer-colors.png
 	cp examples/uitbeamertest-shadeblocks-4.png \
 		examples/beamer-colors-shadeblocks.png
-	cp examples/uitbeamertest-shadeblocks-6.png \
+	cp examples/uitbeamertest-shadeblocks-8.png \
 		examples/beamer-slide-with-element.png
 
 examples: $(example_pdfs) $(example_pngs)

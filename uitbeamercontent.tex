@@ -43,7 +43,7 @@
 \begin{frame}[plain]
     \titlegraphic{\includegraphics
             [height=\paperheight, trim=0 0 1cm 0]
-            {example-art/csiro-five-antennas-bg.jpg}}
+            {download/csiro-five-antennas-bg.jpg}}
             % (The trim key's arguments are left bottom right top)
     \tikzset{split pos = .50}
     \titlepage
@@ -52,7 +52,7 @@
 
 \begin{frame}{Antenna Photo Information}
     \centering
-    \includegraphics[height=.25\paperheight]{example-art/csiro-five-antennas-bg.jpg}
+    \includegraphics[height=.25\paperheight]{download/csiro-five-antennas-bg.jpg}
 
     The antenna image used throughout this presentation is by
     John Masterson,
@@ -150,7 +150,7 @@
 
             \begin{tikzpicture}
                 \node[inner sep=0, outer sep=0] (bg)
-                    {\includegraphics[height=\eh]{example-art/csiro-five-antennas-bg.jpg}};
+                    {\includegraphics[height=\eh]{download/csiro-five-antennas-bg.jpg}};
                 \uitsplitbackground[
                     split pos = .55,
                     split left/.style = {},
@@ -159,7 +159,7 @@
             \end{tikzpicture}
             \begin{tikzpicture}
                 \node[inner sep=0, outer sep=0] (bg)
-                    {\includegraphics[height=\eh]{example-art/csiro-five-antennas-bg.jpg}};
+                    {\includegraphics[height=\eh]{download/csiro-five-antennas-bg.jpg}};
                 \uitsplitbackground[
                     split pos = .75,
                     split left/.style = {},
@@ -168,7 +168,7 @@
             \end{tikzpicture}
             \begin{tikzpicture}
                 \node[inner sep=0, outer sep=0] (bg)
-                    {\includegraphics[height=\eh]{example-art/csiro-five-antennas-bg.jpg}};
+                    {\includegraphics[height=\eh]{download/csiro-five-antennas-bg.jpg}};
                 \uitsplitbackground[
                     split pos=.33,
                     split rays=true,
@@ -199,13 +199,10 @@
     \end{itemize}
 \end{frame}
 
-\mode<presentation>
-{
-\begin{frame}[plain]
+\begin{frame}{Regular frame with background rays}
     To add decorative rays in background, \\
     use the \texttt{bgelement} option when including the \texttt{uit}
     inner theme.
 \end{frame}
-}
 
 \end{document}

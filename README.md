@@ -141,7 +141,7 @@ and optional trimming.
     % Set title graphic
     \titlegraphic{\includegraphics
             [height=\paperheight, trim=0 0 1cm 0]
-            {example-art/csiro-five-antennas-bg.jpg}}
+            {download/csiro-five-antennas-bg.jpg}}
             % (The trim key's arguments are left bottom right top)
 
     % Adjust split position
