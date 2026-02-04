@@ -11,7 +11,7 @@ specifically the graphic profile introduced in 2019.
 
 <https://uit.no/ansatte/grafiskprofil>
 
-![Example of beamer presentation with UiT title page](examples/beamer-title.png "Example of title page")
+![Example of UiT beamer title page with photo on the right side](examples/beamer-title-graphic.png "Example title page with photo")
 
 Sample PDFs:
 
@@ -70,7 +70,8 @@ theme UiT, and the OpenSans font:
 \useoutertheme{infolines}
 ```
 
-### Beamer Color Theme
+Beamer Color Theme
+----------------------------------------------------------------------
 
 By default the color theme colors the text of headers on a white background,
 similar to beamer's default.
@@ -86,13 +87,18 @@ To get shaded backgrounds for headers and blocks, similar to beamer's
 \usecolortheme[shadeblocks]{uit}
 ```
 
-### Beamer Inner Theme / Title Page
+Beamer Inner Theme / Title Page
+----------------------------------------------------------------------
 
 The UiT inner theme mostly changes the title page.
 It should magically make your title page look very similar to the UiT
 PowerPoint template's title page, with split blue background, starburst
 decorative element (profilelement), and UiT logo.
-(Don't forget to run `make` to download the logo.)
+(Don't forget to run `make` first to download the logo.)
+
+![Example of beamer presentation with UiT title page](examples/beamer-title.png "Example of title page")
+
+### Adjusting Angle Element Position
 
 Different aspects of the angled split in the title page (skråelement)
 can be controlled through PGF/TikZ keys.
@@ -129,6 +135,23 @@ and optional trimming.
 
 ![Example of UiT beamer title page with photo on the right side](examples/beamer-title-graphic.png "Example title page with photo")
 
+```latex
+% Title frame with graphic
+\begin{frame}[plain]
+    % Set title graphic
+    \titlegraphic{\includegraphics
+            [height=\paperheight, trim=0 0 1cm 0]
+            {example-art/csiro-five-antennas-bg.jpg}}
+            % (The trim key's arguments are left bottom right top)
+
+    % Adjust split position
+    \tikzset{split pos = .50}
+
+    % Render title
+    \titlepage
+\end{frame}
+```
+
 Antenna photo by John Masterson, [CSIRO],
 licensed under [CC-BY-3.0],
 used unmodified except for cropping.
@@ -137,13 +160,6 @@ More info at [the photo's Wikimedia Commons page].
 [CSIRO]: https://www.scienceimage.csiro.au/pages/about/
 [CC-BY-3.0]: https://creativecommons.org/licenses/by/3.0/
 [the photo's Wikimedia Commons page]: https://commons.wikimedia.org/wiki/File:CSIRO_ScienceImage_3881_Five_Antennas_at_Narrabri.jpg
-
-```latex
-\titlegraphic{\includegraphics
-        [height=\paperheight, trim=0 0 1cm 0]
-        {example-art/csiro-five-antennas-bg.jpg}}
-        % (The trim key's arguments are left bottom right top)
-```
 
 Note that `\includegraphics` does not enlarge images, so if your photo is too
 low a resolution, it might not stretch to the top and bottom of the page,
